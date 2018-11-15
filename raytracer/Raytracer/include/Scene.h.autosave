@@ -2,10 +2,16 @@
 #define SCENE_H_
 #include <eigen3/Eigen/Geometry>
 #include <vector>
+#include <Camera.h>
+#include <Light.h>
+#include <Object.h>
 
 class Scene{
 public:
     Scene()=default;
+    AddCamera(Camera c);
+    AddLight(Light l);
+    AddObject(Object o);
 
 private:
     std::vector<Light> lights;

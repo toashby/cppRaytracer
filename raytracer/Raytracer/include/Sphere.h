@@ -16,4 +16,4 @@ private:
     Eigen::Vector3f m_position;
 };
 
-#endif // HIT_H
+#endif

@@ -2,14 +2,16 @@
 #define LOAD_H_
 #include <eigen3/Eigen/Geometry>
 #include <vector>
+#include "Object.h"
+#include "Light.h"
 
 class Load{
 public:
     Load()=default;
-    Load(float x, float y, float z);
 
-    Eigen::Vector3f getPosition();
-
+    std::vector<Light> getLights();
+    std::vector<Object> getObjects();
+    Camera getCamera();
 
 private:
     std::vector<Light> lights;

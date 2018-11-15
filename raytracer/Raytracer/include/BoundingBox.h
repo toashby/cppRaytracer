@@ -4,7 +4,7 @@
 
 class BoundingBox{
 public:
-    CreateBoundingBox();
+    void CreateBoundingBox(Geometry g) const;
 
 private:
     Eigen::Vector3f m_p1;

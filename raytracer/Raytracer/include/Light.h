@@ -4,11 +4,12 @@
 
 class Light{
 public:
+    Light()=default;
     Light(Eigen::Vector3f pos, float intensity);
 
     Eigen::Vector3f getPosition();
     float getIntensity();
-    setIntensity(float i);
+    void setIntensity(float i);
 
 private:
     Eigen::Vector3f m_position;

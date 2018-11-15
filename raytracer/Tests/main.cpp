@@ -5,6 +5,18 @@
 #include "Vec3.h"
 #include "Sphere.h"
 #include "Ray.h"
+#include "Camera.h"
+#include "Cube.h"
+#include "Geometry.h"
+#include "Image.h"
+#include "Light.h"
+#include "Load.h"
+#include "Material.h"
+#include "Object.h"
+#include "Render.h"
+#include "Scene.h"
+#include "Settings.h"
+#include "Triangle.h"
 
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc,argv);
@@ -54,4 +66,52 @@ TEST(Sphere, miss){
     Eigen::Vector3f q;
     EXPECT_FALSE(s.hit(r.getPosition(), r.getDirection(), t, q));
 
+}
+
+TEST(Camera,defaultCtor){
+    Camera c;
+}
+
+TEST(Cube,defaultCtor){
+    Cube c;
+}
+
+TEST(Geometry,defaultCtor){
+    Geometry g;
+}
+
+TEST(Image,defaultCtor){
+    Image img;
+}
+
+TEST(Light,defaultCtor){
+    Light l;
+}
+
+TEST(Load,defaultCtor){
+    Load l;
+}
+
+TEST(Material,defaultCtor){
+    Material m;
+}
+
+TEST(Ray,defaultCtor){
+    Ray r;
+}
+
+TEST(Render,defaultCtor){
+    //Render r; //no constructor yet
+}
+
+TEST(Scene,defaultCtor){
+    Scene s;
+}
+
+TEST(Settings,defaultCtor){
+    Settings s;
+}
+
+TEST(Triangle,defaultCtor){
+    //Triangle t(Eigen::Vector3f(0.0f,0.0f,0.0f), Eigen::Vector3f(2.0f,2.0f,2.0f), Eigen::Vector3f(1.0f,0.0f,0.0f));
 }

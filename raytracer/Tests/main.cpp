@@ -50,16 +50,17 @@ TEST(Sphere,userCtor){
     EXPECT_FLOAT_EQ(s.getRadius(),4.0f);
 }
 
-TEST(Sphere, hit){
-    Sphere s(Eigen::Vector3f(1.0f, 1.0f, 1.0f), 4.0f);
+TEST(Sphere, hit){ //Test a ray which goes through a sphere
+    Sphere s(Eigen::Vector3f(10.0f, 10.0f, 10.0f), 4.0f);
     Ray r(Eigen::Vector3f(0.0f, 0.0f, 0.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
     float t;
     Eigen::Vector3f q;
     EXPECT_TRUE(s.hit(r.getPosition(), r.getDirection(), t, q));
+    ASSERT_NE(t, 0);
 
 }
 
-TEST(Sphere, miss){
+TEST(Sphere, miss){ //test a ray which misses a sphere
     Sphere s(Eigen::Vector3f(1.0f, 1.0f, 1.0f), 4.0f);
     Ray r(Eigen::Vector3f(5.0f, 5.0f, 5.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
     float t;

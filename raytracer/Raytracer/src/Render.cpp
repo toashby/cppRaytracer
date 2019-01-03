@@ -1,6 +1,6 @@
 #include "Render.h"
-
-Render::Render()
-{
-
-}
+#include <iostream>
+#include <fstream>
+#include <eigen3/Eigen/Geometry>
+#include "Ray.h"
+#include "Sphere.h"

@@ -1,19 +1,25 @@
 #ifndef RAY_H_
 #define RAY_H_
-#include "Vec3.h"
+//#include "Vec3.h"
 #include <eigen3/Eigen/Geometry>
 
 class Ray{
 public:
     Ray()=default;
-    Ray(const Eigen::Vector3f position, const Eigen::Vector3f direction);
+    Ray(const Eigen::Vector3f origin, const Eigen::Vector3f direction);
 
-    Eigen::Vector3f getDirection() const;
-    Eigen::Vector3f getPosition() const;
+    Eigen::Vector3f origin() const {return m_origin;}
+    Eigen::Vector3f direction() const {return m_direction;}
+
+    Eigen::Vector3f pointAtParameter(float t) const {
+        return m_origin + t * m_direction;
+    }
+
+    Eigen::Vector3f m_origin;
+    Eigen::Vector3f m_direction;
 
 private:
-    Eigen::Vector3f m_position;
-    Eigen::Vector3f m_direction;
+
 };
 
 #endif // HIT_H

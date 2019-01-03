@@ -7,6 +7,9 @@ class Render
 public:
     Render();
     Render(Scene s);
+
+    int resx;
+    int resy;
 };
 
 #endif // RENDER_H

@@ -367,15 +367,28 @@ compiler_clean: compiler_moc_predefs_clean
 
 main.o: main.cpp ../Raytracer/include/Vec3.h \
 		../Raytracer/include/Sphere.h \
-		../Raytracer/include/Ray.h
+		../Raytracer/include/Geometry.h \
+		../Raytracer/include/Ray.h \
+		../Raytracer/include/Camera.h \
+		../Raytracer/include/Cube.h \
+		../Raytracer/include/Image.h \
+		../Raytracer/include/Light.h \
+		../Raytracer/include/Load.h \
+		../Raytracer/include/Object.h \
+		../Raytracer/include/Material.h \
+		../Raytracer/include/Render.h \
+		../Raytracer/include/Scene.h \
+		../Raytracer/include/Settings.h \
+		../Raytracer/include/Triangle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-Ray.o: ../Raytracer/src/Ray.cpp ../Raytracer/include/Ray.h \
-		../Raytracer/include/Vec3.h
+Ray.o: ../Raytracer/src/Ray.cpp ../Raytracer/include/Ray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Ray.o ../Raytracer/src/Ray.cpp
 
 Sphere.o: ../Raytracer/src/Sphere.cpp ../Raytracer/include/Sphere.h \
-		../Raytracer/include/Vec3.h
+		../Raytracer/include/Vec3.h \
+		../Raytracer/include/Geometry.h \
+		../Raytracer/include/Ray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Sphere.o ../Raytracer/src/Sphere.cpp
 
 ####### Install

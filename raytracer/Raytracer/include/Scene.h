@@ -13,6 +13,12 @@ public:
     void AddLight(Light l);
     //void AddObject(Object o);
 
+    //void Render();
+    void Render(Scene s);
+    void Render();
+    int resx;
+    int resy;
+    int nsam;
 private:
     std::vector<Light> lights;
     //std::vector<Object> objects;

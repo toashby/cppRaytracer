@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.5
+** Created by: Qt User Interface Compiler version 5.11.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,15 +10,12 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
@@ -176,6 +173,9 @@ public:
         gridLayout_2->addWidget(m_renderButton, 5, 0, 1, 1);
 
         m_objectSelection = new QComboBox(s_drawGB);
+        m_objectSelection->addItem(QString());
+        m_objectSelection->addItem(QString());
+        m_objectSelection->addItem(QString());
         m_objectSelection->setObjectName(QStringLiteral("m_objectSelection"));
 
         gridLayout_2->addWidget(m_objectSelection, 0, 0, 1, 1);
@@ -232,22 +232,20 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "ngl Qt Demo", Q_NULLPTR));
-        s_transformGB->setTitle(QApplication::translate("MainWindow", "Transform", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "Rotation", Q_NULLPTR));
-        label_2->setText(QApplication::translate("MainWindow", "Scale", Q_NULLPTR));
-        label_3->setText(QApplication::translate("MainWindow", "Position", Q_NULLPTR));
-        s_drawGB->setTitle(QApplication::translate("MainWindow", "Draw", Q_NULLPTR));
-        m_renderButton->setText(QApplication::translate("MainWindow", "Render Scene", Q_NULLPTR));
-        m_objectSelection->clear();
-        m_objectSelection->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Teapot", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Sphere", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Cube", Q_NULLPTR)
-        );
-        m_wireframe->setText(QApplication::translate("MainWindow", "WireFrame", Q_NULLPTR));
-        m_colour->setText(QApplication::translate("MainWindow", "Choose Colour", Q_NULLPTR));
-        m_createSphere->setText(QApplication::translate("MainWindow", "Create Sphere", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "ngl Qt Demo", nullptr));
+        s_transformGB->setTitle(QApplication::translate("MainWindow", "Transform", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Rotation", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Scale", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Position", nullptr));
+        s_drawGB->setTitle(QApplication::translate("MainWindow", "Draw", nullptr));
+        m_renderButton->setText(QApplication::translate("MainWindow", "Render Scene", nullptr));
+        m_objectSelection->setItemText(0, QApplication::translate("MainWindow", "Teapot", nullptr));
+        m_objectSelection->setItemText(1, QApplication::translate("MainWindow", "Sphere", nullptr));
+        m_objectSelection->setItemText(2, QApplication::translate("MainWindow", "Cube", nullptr));
+
+        m_wireframe->setText(QApplication::translate("MainWindow", "WireFrame", nullptr));
+        m_colour->setText(QApplication::translate("MainWindow", "Choose Colour", nullptr));
+        m_createSphere->setText(QApplication::translate("MainWindow", "Create Sphere", nullptr));
     } // retranslateUi
 
 };

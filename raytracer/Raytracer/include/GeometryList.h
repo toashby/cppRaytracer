@@ -4,6 +4,14 @@
 #include "Geometry.h"
 #include <iostream>
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 08/01/19 \n
+
+/// \class GeometryList.h
+/// \brief A simple geometry list class with find closest object method
+/// \todo
+
 class GeometryList: public Geometry
 {
 public:

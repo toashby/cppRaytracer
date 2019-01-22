@@ -5,6 +5,13 @@
 #include <iostream>
 #include "Ray.h"
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 20/01/19 \n
+
+/// \class lambertian
+/// \brief A lambertian diffuse material
+
 class Sphere : public Geometry
 {
 public:

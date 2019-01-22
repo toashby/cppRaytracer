@@ -3,6 +3,14 @@
 #include <eigen3/Eigen/Geometry>
 #include "Ray.h"
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 10/01/19 \n
+
+/// \class Camera.h
+/// \brief A simple camera class with variable POV
+/// \todo add camera rotation
+
 class Camera
 {
 public:

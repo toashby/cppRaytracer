@@ -3,6 +3,17 @@
 #include <eigen3/Eigen/Geometry>
 #include "Geometry.h"
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 15/01/19 \n
+///
+/// Revision History :
+/// Initial Version 26/12/18
+
+/// \class Material.h
+/// \brief A simple abstract material class
+/// \todo add dielectrics and specular
+
 struct hit_record;
 
 class Material
@@ -27,6 +38,13 @@ Eigen::Vector3f randomInUnitSphere()
 }
 
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 20/01/19 \n
+
+/// \class lambertian
+/// \brief A lambertian diffuse material
+
 class lambertian : public Material
 {
 public:
@@ -41,6 +59,14 @@ public:
 
     Eigen::Vector3f albedo;
 };
+
+
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 20/01/19 \n
+
+/// \class metal
+/// \brief A metal material
 
 class metal : public Material
 {

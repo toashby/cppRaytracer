@@ -6,6 +6,14 @@
 #include "Ray.h"
 #include <iostream>
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 20/01/19 \n
+
+/// \class Cube.h
+/// \brief A Cube class. Currently only renders a single triangle
+/// \todo render a full cube not one triangle
+
 class Cube : public Geometry
 {
 public:

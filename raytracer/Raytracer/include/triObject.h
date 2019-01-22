@@ -58,7 +58,7 @@ public:
         bool hitSomething = false;
         double closest_so_far = t_max;
 
-        for(int fc = 0; fc < faceList.size(); fc++)
+        for(unsigned int fc = 0; fc < faceList.size(); fc++)
         {
             //if(hitSomething == true){
             //    break;

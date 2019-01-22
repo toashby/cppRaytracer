@@ -1,10 +1,14 @@
 #ifndef GEOMETRY_H_
 #define GEOMETRY_H_
 #include <eigen3/Eigen/Geometry>
-//#include "Triangle.h"
-//#include <vector>
 #include "Ray.h"
-//#include "Material.h"
+
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 08/01/19 \n
+
+/// \class Geometry.h
+/// \brief Abstract geometry class
 
 class Material;
 

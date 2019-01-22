@@ -15,7 +15,7 @@ public:
 
     //void Render();
     void Render(Scene s);
-    void Render();
+    void Render(int samples);
     int resx;
     int resy;
     int nsam;

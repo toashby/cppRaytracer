@@ -22,6 +22,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -48,15 +49,19 @@ public:
     QDoubleSpinBox *m_positionZ;
     QGroupBox *s_drawGB;
     QGridLayout *gridLayout_2;
-    QPushButton *m_renderButton;
     QComboBox *m_objectSelection;
     QCheckBox *m_wireframe;
     QPushButton *m_colour;
-    QSpacerItem *verticalSpacer;
     QPushButton *m_createSphere;
+    QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer;
     QSpacerItem *verticalSpacer_2;
     QListView *listView;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_3;
+    QSpinBox *m_numSamplesBox;
+    QPushButton *m_renderButton;
+    QLabel *samplesLabel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -64,7 +69,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(972, 656);
+        MainWindow->resize(972, 682);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         s_mainWindowGridLayout = new QGridLayout(centralwidget);
@@ -167,11 +172,6 @@ public:
         s_drawGB->setObjectName(QStringLiteral("s_drawGB"));
         gridLayout_2 = new QGridLayout(s_drawGB);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        m_renderButton = new QPushButton(s_drawGB);
-        m_renderButton->setObjectName(QStringLiteral("m_renderButton"));
-
-        gridLayout_2->addWidget(m_renderButton, 5, 0, 1, 1);
-
         m_objectSelection = new QComboBox(s_drawGB);
         m_objectSelection->addItem(QString());
         m_objectSelection->addItem(QString());
@@ -190,14 +190,14 @@ public:
 
         gridLayout_2->addWidget(m_colour, 3, 0, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_2->addItem(verticalSpacer, 7, 0, 1, 1);
-
         m_createSphere = new QPushButton(s_drawGB);
         m_createSphere->setObjectName(QStringLiteral("m_createSphere"));
 
         gridLayout_2->addWidget(m_createSphere, 4, 0, 1, 1);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_2->addItem(verticalSpacer, 6, 0, 1, 1);
 
 
         s_mainWindowGridLayout->addWidget(s_drawGB, 1, 1, 1, 1);
@@ -216,10 +216,34 @@ public:
 
         s_mainWindowGridLayout->addWidget(listView, 0, 3, 2, 1);
 
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        gridLayout_3 = new QGridLayout(groupBox);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        m_numSamplesBox = new QSpinBox(groupBox);
+        m_numSamplesBox->setObjectName(QStringLiteral("m_numSamplesBox"));
+        m_numSamplesBox->setMinimum(1);
+        m_numSamplesBox->setMaximum(999999);
+
+        gridLayout_3->addWidget(m_numSamplesBox, 0, 1, 1, 1);
+
+        m_renderButton = new QPushButton(groupBox);
+        m_renderButton->setObjectName(QStringLiteral("m_renderButton"));
+
+        gridLayout_3->addWidget(m_renderButton, 1, 1, 1, 1);
+
+        samplesLabel = new QLabel(groupBox);
+        samplesLabel->setObjectName(QStringLiteral("samplesLabel"));
+
+        gridLayout_3->addWidget(samplesLabel, 0, 0, 1, 1);
+
+
+        s_mainWindowGridLayout->addWidget(groupBox, 2, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 972, 22));
+        menubar->setGeometry(QRect(0, 0, 972, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -238,7 +262,6 @@ public:
         label_2->setText(QApplication::translate("MainWindow", "Scale", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "Position", nullptr));
         s_drawGB->setTitle(QApplication::translate("MainWindow", "Draw", nullptr));
-        m_renderButton->setText(QApplication::translate("MainWindow", "Render Scene", nullptr));
         m_objectSelection->setItemText(0, QApplication::translate("MainWindow", "Teapot", nullptr));
         m_objectSelection->setItemText(1, QApplication::translate("MainWindow", "Sphere", nullptr));
         m_objectSelection->setItemText(2, QApplication::translate("MainWindow", "Cube", nullptr));
@@ -246,6 +269,9 @@ public:
         m_wireframe->setText(QApplication::translate("MainWindow", "WireFrame", nullptr));
         m_colour->setText(QApplication::translate("MainWindow", "Choose Colour", nullptr));
         m_createSphere->setText(QApplication::translate("MainWindow", "Create Sphere", nullptr));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Render", nullptr));
+        m_renderButton->setText(QApplication::translate("MainWindow", "Render Scene", nullptr));
+        samplesLabel->setText(QApplication::translate("MainWindow", "Number Of Samples", nullptr));
     } // retranslateUi
 
 };

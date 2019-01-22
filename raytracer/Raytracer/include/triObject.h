@@ -60,9 +60,6 @@ public:
 
         for(unsigned int fc = 0; fc < faceList.size(); fc++)
         {
-            //if(hitSomething == true){
-            //    break;
-            //}
             float vin = faceList[fc].m_vert[0];
             Eigen::Vector3f vert0 = Eigen::Vector3f(vertList[vin][0], vertList[vin][1], vertList[vin][2]); // assign elements manually
             //std::cout << "triobjprint: " << vertList[vin0][0] << " " << vertList[vin0][1] << " " << vertList[vin0][2] << std::endl;
@@ -116,7 +113,6 @@ public:
 
         if(t > t_min && t < t_max)
         {
-            //std::cout << t << " camdist z: " << vert2(2) << std::endl;
                 //t_max = t;
                 rec.t = t;
                 rec.p = r.pointAtParameter(rec.t);

@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), m_ui(new Ui::MainW
   connect(m_ui->m_objectSelection,SIGNAL(currentIndexChanged(int)),m_gl,SLOT(setObjectMode(int)));
   connect(m_ui->m_colour,SIGNAL(clicked()),m_gl,SLOT(setColour()));
 
+
+  connect(m_ui->m_numSamplesBox,SIGNAL(valueChanged(int)),m_gl,SLOT(setSamples(int)));
+
   connect(m_ui->m_createSphere,SIGNAL(clicked()),m_gl,SLOT(createSphere()));
   connect(m_ui->m_renderButton,SIGNAL(clicked()),m_gl,SLOT(renderScene()));
 
@@ -32,5 +35,11 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), m_ui(new Ui::MainW
 
 MainWindow::~MainWindow()
 {
+
     delete m_ui;
 }
+
+//setSamples
+//{
+//    m_gl -> setParam()
+//}

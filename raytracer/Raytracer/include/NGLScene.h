@@ -78,6 +78,8 @@ public :
     void renderScene();
     ///@brief a slot to create a sphere
     void createSphere();
+    ///@brief a slot to set the number of samples
+    void setSamples(int _s);
 
 private :
     /// @brief m_wireframe mode
@@ -99,6 +101,12 @@ private :
         //----------------------------------------------------------------------------------------------------------------------
     std::unique_ptr<ngl::Obj> m_mesh;
     std::vector<ngl::Vec3> vertList;
+
+    /// @brief number of samples
+    int m_samples = 1;
+
+//private slots:
+//        void renderScene();
 
 protected:
   //----------------------------------------------------------------------------------------------------------------------

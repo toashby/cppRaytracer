@@ -245,7 +245,7 @@ void NGLScene::renderScene()
 {
     std::cout << "rendering!" << std::endl;
     Scene sc;
-    sc.Render();
+    sc.Render(m_samples);
 }
 
 void NGLScene::createSphere()
@@ -261,4 +261,9 @@ void NGLScene::createSphere()
         //m.colour=rng->getRandomColour4();
         m.type=MeshType::SPHERE;
         m_meshes.push_back(m);
+}
+
+void NGLScene::setSamples(int _s)
+{
+    m_samples = _s;
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_NGLScene_t {
-    QByteArrayData data[21];
-    char stringdata0[201];
+    QByteArrayData data[23];
+    char stringdata0[215];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,9 @@ QT_MOC_LITERAL(16, 149, 13), // "setObjectMode"
 QT_MOC_LITERAL(17, 163, 2), // "_i"
 QT_MOC_LITERAL(18, 166, 9), // "setColour"
 QT_MOC_LITERAL(19, 176, 11), // "renderScene"
-QT_MOC_LITERAL(20, 188, 12) // "createSphere"
+QT_MOC_LITERAL(20, 188, 12), // "createSphere"
+QT_MOC_LITERAL(21, 201, 10), // "setSamples"
+QT_MOC_LITERAL(22, 212, 2) // "_s"
 
     },
     "NGLScene\0toggleWireframe\0\0_mode\0"
@@ -59,7 +61,8 @@ QT_MOC_LITERAL(20, 188, 12) // "createSphere"
     "setZRotation\0_z\0setXScale\0setYScale\0"
     "setZScale\0setXPosition\0setYPosition\0"
     "setZPosition\0setObjectMode\0_i\0setColour\0"
-    "renderScene\0createSphere"
+    "renderScene\0createSphere\0setSamples\0"
+    "_s"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +72,7 @@ static const uint qt_meta_data_NGLScene[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,20 +80,21 @@ static const uint qt_meta_data_NGLScene[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   84,    2, 0x0a /* Public */,
-       4,    1,   87,    2, 0x0a /* Public */,
-       6,    1,   90,    2, 0x0a /* Public */,
-       8,    1,   93,    2, 0x0a /* Public */,
-      10,    1,   96,    2, 0x0a /* Public */,
-      11,    1,   99,    2, 0x0a /* Public */,
-      12,    1,  102,    2, 0x0a /* Public */,
-      13,    1,  105,    2, 0x0a /* Public */,
-      14,    1,  108,    2, 0x0a /* Public */,
-      15,    1,  111,    2, 0x0a /* Public */,
-      16,    1,  114,    2, 0x0a /* Public */,
-      18,    0,  117,    2, 0x0a /* Public */,
-      19,    0,  118,    2, 0x0a /* Public */,
-      20,    0,  119,    2, 0x0a /* Public */,
+       1,    1,   89,    2, 0x0a /* Public */,
+       4,    1,   92,    2, 0x0a /* Public */,
+       6,    1,   95,    2, 0x0a /* Public */,
+       8,    1,   98,    2, 0x0a /* Public */,
+      10,    1,  101,    2, 0x0a /* Public */,
+      11,    1,  104,    2, 0x0a /* Public */,
+      12,    1,  107,    2, 0x0a /* Public */,
+      13,    1,  110,    2, 0x0a /* Public */,
+      14,    1,  113,    2, 0x0a /* Public */,
+      15,    1,  116,    2, 0x0a /* Public */,
+      16,    1,  119,    2, 0x0a /* Public */,
+      18,    0,  122,    2, 0x0a /* Public */,
+      19,    0,  123,    2, 0x0a /* Public */,
+      20,    0,  124,    2, 0x0a /* Public */,
+      21,    1,  125,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -107,6 +111,7 @@ static const uint qt_meta_data_NGLScene[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   22,
 
        0        // eod
 };
@@ -131,6 +136,7 @@ void NGLScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 11: _t->setColour(); break;
         case 12: _t->renderScene(); break;
         case 13: _t->createSphere(); break;
+        case 14: _t->setSamples((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -161,13 +167,13 @@ int NGLScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

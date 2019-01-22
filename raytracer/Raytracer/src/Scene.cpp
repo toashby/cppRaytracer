@@ -40,11 +40,11 @@ Eigen::Vector3f color(const Ray& r, Geometry *world, int depth)
     }
 }
 
-void Scene::Render()
+void Scene::Render(int samples)
 {
     resx = 300;
     resy = 150;
-    nsam = 1;//samples
+    nsam = samples;//samples
 
     std::ofstream myfile;
     myfile.open ("example.ppm");

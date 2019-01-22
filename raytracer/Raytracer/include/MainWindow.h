@@ -20,6 +20,9 @@ private:
     Ui::MainWindow *m_ui;
         /// @brief our openGL widget
         NGLScene *m_gl;
+
+//private slots:
+//        void renderSceneUI();
 };
 
 #endif // MAINWINDOW_H

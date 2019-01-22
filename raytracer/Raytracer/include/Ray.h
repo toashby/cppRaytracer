@@ -3,6 +3,13 @@
 //#include "Vec3.h"
 #include <eigen3/Eigen/Geometry>
 
+/// \author THOMAS ASHBY
+/// \version 1.0
+/// \date Last Revision 28/12/18 \n
+
+/// \class Ray
+/// \brief A simple ray class with an origin and direction
+
 class Ray
 {
 public:

@@ -3,7 +3,8 @@
 //#include "Vec3.h"
 #include <eigen3/Eigen/Geometry>
 
-class Ray{
+class Ray
+{
 public:
     Ray()=default;
     Ray(const Eigen::Vector3f origin, const Eigen::Vector3f direction);
@@ -11,7 +12,8 @@ public:
     Eigen::Vector3f origin() const {return m_origin;}
     Eigen::Vector3f direction() const {return m_direction;}
 
-    Eigen::Vector3f pointAtParameter(float t) const {
+    Eigen::Vector3f pointAtParameter(float t) const
+    {
         return m_origin + t * m_direction;
     }
 

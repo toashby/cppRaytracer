@@ -3,6 +3,6 @@
 #include "Geometry.h"
 #include "BoundingBox.h"
 
-void BoundingBox::CreateBoundingBox(Geometry g) const{
+//void BoundingBox::CreateBoundingBox(Geometry g) const{
 
-}
+//}

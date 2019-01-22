@@ -2,21 +2,22 @@
 #define LOAD_H_
 #include <eigen3/Eigen/Geometry>
 #include <vector>
-#include "Object.h"
+//#include "Object.h"
 #include "Light.h"
 
-class Load{
+class Load
+{
 public:
     Load()=default;
 
-    std::vector<Light> getLights();
-    std::vector<Object> getObjects();
-    Camera getCamera();
+    //std::vector<Light> getLights();
+    //std::vector<Object> getObjects();
+    //Camera getCamera();
 
 private:
-    std::vector<Light> lights;
-    std::vector<Object> objects;
-    Camera camera;
+    //std::vector<Light> lights;
+    //std::vector<Object> objects;
+    //Camera camera;
 };
 
 #endif

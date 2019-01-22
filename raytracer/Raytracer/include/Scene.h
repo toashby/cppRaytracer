@@ -4,9 +4,9 @@
 #include <vector>
 #include <Camera.h>
 #include <Light.h>
-#include <Object.h>
 
-class Scene{
+class Scene
+{
 public:
     Scene()=default;
     void AddCamera(Camera c);
@@ -22,7 +22,7 @@ public:
 private:
     std::vector<Light> lights;
     //std::vector<Object> objects;
-    Camera camera;
+    //Camera camera;
 };
 
 #endif

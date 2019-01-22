@@ -2,7 +2,8 @@
 #define TRIANGLE_H_
 #include <eigen3/Eigen/Geometry>
 
-class Triangle{
+class Triangle
+{
 public:
     Triangle(Eigen::Vector3f p0, Eigen::Vector3f p1, Eigen::Vector3f p2);
 

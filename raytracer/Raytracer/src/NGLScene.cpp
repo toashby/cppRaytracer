@@ -4,6 +4,7 @@
 #include <ngl/NGLInit.h>
 #include <ngl/VAOPrimitives.h>
 #include <ngl/ShaderLib.h>
+#include <ngl/Vec3.h>
 #include <QColorDialog>
 
 #include "Scene.h"
@@ -86,6 +87,12 @@ void NGLScene::initializeGL()
   m_text.reset(  new  ngl::Text(QFont("Arial",18)));
   m_text->setScreenSize(this->size().width(),this->size().height());
   m_text->setColour(1.0,1.0,0.0);
+
+  //load obj
+  m_mesh.reset( new ngl::Obj("box.obj"));
+  m_mesh->createVAO();
+  m_mesh->getFaceList();
+  vertList = m_mesh->getVertexList();
 }
 
 //----------------------------------------------------------------------------------------------------------------------

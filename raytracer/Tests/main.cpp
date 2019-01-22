@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include <eigen3/Eigen/Geometry>
 
-#include "Vec3.h"
 #include "Sphere.h"
 #include "Ray.h"
 #include "Camera.h"
@@ -12,8 +11,6 @@
 #include "Light.h"
 #include "Load.h"
 #include "Material.h"
-#include "Object.h"
-#include "Render.h"
 #include "Scene.h"
 #include "Settings.h"
 #include "Triangle.h"
@@ -51,7 +48,7 @@ TEST(Sphere,userCtor){
 }
 
 TEST(Sphere, hit){ //Test a ray which goes through a sphere
-    Sphere s(Eigen::Vector3f(10.0f, 10.0f, 10.0f), 4.0f);
+    Sphere s(Eigen::Vector3f(10.0f, 10.0f, 10.0f), 4.0f, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
     Ray r(Eigen::Vector3f(0.0f, 0.0f, 0.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
     float t;
     Eigen::Vector3f q;
@@ -61,7 +58,7 @@ TEST(Sphere, hit){ //Test a ray which goes through a sphere
 }
 
 TEST(Sphere, miss){ //test a ray which misses a sphere
-    Sphere s(Eigen::Vector3f(0.0f, 0.0f, 1.0f), 4.0f);
+    Sphere s(Eigen::Vector3f(0.0f, 0.0f, 1.0f), 4.0f, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
     Ray r(Eigen::Vector3f(5.0f, 5.0f, 5.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
     float t;
     Eigen::Vector3f q;
@@ -70,11 +67,11 @@ TEST(Sphere, miss){ //test a ray which misses a sphere
 }
 
 TEST(Camera,defaultCtor){
-    Camera c;
+    //Camera c;
 }
 
 TEST(Cube,defaultCtor){
-    Cube c;
+    //Cube c;
 }
 
 TEST(Image,defaultCtor){
@@ -90,15 +87,11 @@ TEST(Load,defaultCtor){
 }
 
 TEST(Material,defaultCtor){
-    Material m;
+    //Material m;
 }
 
 TEST(Ray,defaultCtor){
     Ray r;
-}
-
-TEST(Render,defaultCtor){
-    //Render r; //no constructor yet
 }
 
 TEST(Scene,defaultCtor){

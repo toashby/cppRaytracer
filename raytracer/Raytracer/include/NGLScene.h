@@ -10,6 +10,7 @@
 #include <QResizeEvent>
 #include <QOpenGLWidget>
 #include <memory>
+#include <ngl/Obj.h>
 
 
 /// @file NGLScene.h
@@ -93,6 +94,11 @@ private :
     // text for rendering
     //----------------------------------------------------------------------------------------------------------------------
     std::unique_ptr<ngl::Text> m_text;
+
+    /// @brief our model
+        //----------------------------------------------------------------------------------------------------------------------
+    std::unique_ptr<ngl::Obj> m_mesh;
+    std::vector<ngl::Vec3> vertList;
 
 protected:
   //----------------------------------------------------------------------------------------------------------------------

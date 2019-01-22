@@ -3,7 +3,8 @@
 #include <eigen3/Eigen/Geometry>
 #include <vector>
 
-class Settings{
+class Settings
+{
 public:
     Settings()=default;
 

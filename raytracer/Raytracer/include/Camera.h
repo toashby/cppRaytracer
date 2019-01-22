@@ -3,22 +3,27 @@
 #include <eigen3/Eigen/Geometry>
 #include "Ray.h"
 
-class Camera{
+class Camera
+{
 public:
-    Camera() {
-        lowerLeftCorner = Eigen::Vector3f(-2.0, -1.0, -1.0);
-        horizontal = Eigen::Vector3f(4.0, 0.0, 0.0);
-        vertical = Eigen::Vector3f(0.0, 2.0, 0.0);
-        origin = Eigen::Vector3f(0.0, 0.0, 0.0);
+    Camera(Eigen::Vector3f lookfrom, Eigen::Vector3f lookat, Eigen::Vector3f vup, float vfov, float aspect)
+    {
+        Eigen::Vector3f u, v, w;
+        float theta = vfov*M_PI/180;
+        float halfHeight = tan(theta/2);
+        float halfWidth  = aspect*halfHeight;
+        origin = lookfrom;
+        w = lookfrom - lookat;
+        w = w.normalized();
+        u = vup.cross(w);
+        u = u.normalized();
+        v = w.cross(u);
+        lowerLeftCorner = origin - halfWidth*u - halfHeight*v - w;//Z=-1 FOR NORMAL POV
+        horizontal = 2*halfWidth*u;
+        vertical = 2*halfHeight*v;
+        //origin = Eigen::Vector3f(0.0, 0.0, 0.0);
     }
     Ray getRay(float u, float v){return Ray(origin, lowerLeftCorner + u*horizontal + v*vertical - origin);}
-
-    float getFieldOfView() const;
-    Eigen::Vector3f getPosition();
-    Eigen::Vector3f getDirection();
-    bool getOrthographic();
-    unsigned int getWidth();
-    unsigned int getHeight();
 
 private:
     Eigen::Vector3f origin;

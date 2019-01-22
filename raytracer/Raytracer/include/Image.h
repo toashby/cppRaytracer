@@ -2,7 +2,8 @@
 #define IMAGE_H_
 #include <eigen3/Eigen/Geometry>
 
-class Image{
+class Image
+{
 public:
     Image()=default;
     Image(float width, float height);

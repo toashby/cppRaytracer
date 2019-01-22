@@ -22,11 +22,9 @@ CONFIG-=app_bundle
 SOURCES += src/main.cpp \
     src/Ray.cpp \
     src/Sphere.cpp \
-    src/Render.cpp \
     src/Load.cpp \
     src/Light.cpp \
     src/Camera.cpp \
-    src/Object.cpp \
     src/Settings.cpp \
     src/Image.cpp \
     src/Scene.cpp \
@@ -37,17 +35,15 @@ SOURCES += src/main.cpp \
     src/BoundingBox.cpp \
     src/NGLSceneMouseControls.cpp \
     src/NGLScene.cpp \
-    src/MainWindow.cpp
+    src/MainWindow.cpp \
+    src/triObject.cpp
 
 
 HEADERS+= include/Ray.h \
           include/Sphere.h \
-          include/Vec3.h \
-          include/Render.h \
           include/Load.h \
           include/Light.h \
           include/Camera.h \
-          include/Object.h \
           include/Settings.h \
           include/Image.h \
           include/Scene.h \
@@ -59,7 +55,8 @@ HEADERS+= include/Ray.h \
     include/WindowParams.h \
     include/NGLScene.h \
     include/MainWindow.h \
-    include/GeometryList.h
+    include/GeometryList.h \
+    include/triObject.h
 
 FORMS+= $$PWD/ui/MainWindow.ui
 

@@ -2,7 +2,8 @@
 #define LIGHT_H_
 #include <eigen3/Eigen/Geometry>
 
-class Light{
+class Light
+{
 public:
     Light()=default;
     Light(Eigen::Vector3f pos, float intensity);

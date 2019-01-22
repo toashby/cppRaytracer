@@ -53,11 +53,9 @@ OBJECTS_DIR   = obj/
 SOURCES       = src/main.cpp \
 		src/Ray.cpp \
 		src/Sphere.cpp \
-		src/Render.cpp \
 		src/Load.cpp \
 		src/Light.cpp \
 		src/Camera.cpp \
-		src/Object.cpp \
 		src/Settings.cpp \
 		src/Image.cpp \
 		src/Scene.cpp \
@@ -68,16 +66,15 @@ SOURCES       = src/main.cpp \
 		src/BoundingBox.cpp \
 		src/NGLSceneMouseControls.cpp \
 		src/NGLScene.cpp \
-		src/MainWindow.cpp moc/moc_NGLScene.cpp \
+		src/MainWindow.cpp \
+		src/triObject.cpp moc/moc_NGLScene.cpp \
 		moc/moc_MainWindow.cpp
 OBJECTS       = obj/main.o \
 		obj/Ray.o \
 		obj/Sphere.o \
-		obj/Render.o \
 		obj/Load.o \
 		obj/Light.o \
 		obj/Camera.o \
-		obj/Object.o \
 		obj/Settings.o \
 		obj/Image.o \
 		obj/Scene.o \
@@ -89,17 +86,15 @@ OBJECTS       = obj/main.o \
 		obj/NGLSceneMouseControls.o \
 		obj/NGLScene.o \
 		obj/MainWindow.o \
+		obj/triObject.o \
 		obj/moc_NGLScene.o \
 		obj/moc_MainWindow.o
 DIST          = .qmake.stash \
 		raytracer.pro include/Ray.h \
 		include/Sphere.h \
-		include/Vec3.h \
-		include/Render.h \
 		include/Load.h \
 		include/Light.h \
 		include/Camera.h \
-		include/Object.h \
 		include/Settings.h \
 		include/Image.h \
 		include/Scene.h \
@@ -111,14 +106,13 @@ DIST          = .qmake.stash \
 		include/WindowParams.h \
 		include/NGLScene.h \
 		include/MainWindow.h \
-		include/GeometryList.h src/main.cpp \
+		include/GeometryList.h \
+		include/triObject.h src/main.cpp \
 		src/Ray.cpp \
 		src/Sphere.cpp \
-		src/Render.cpp \
 		src/Load.cpp \
 		src/Light.cpp \
 		src/Camera.cpp \
-		src/Object.cpp \
 		src/Settings.cpp \
 		src/Image.cpp \
 		src/Scene.cpp \
@@ -129,7 +123,8 @@ DIST          = .qmake.stash \
 		src/BoundingBox.cpp \
 		src/NGLSceneMouseControls.cpp \
 		src/NGLScene.cpp \
-		src/MainWindow.cpp
+		src/MainWindow.cpp \
+		src/triObject.cpp
 QMAKE_TARGET  = raytracer
 DESTDIR       = 
 TARGET        = raytracer
@@ -325,8 +320,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/Ray.h include/Sphere.h include/Vec3.h include/Render.h include/Load.h include/Light.h include/Camera.h include/Object.h include/Settings.h include/Image.h include/Scene.h include/Material.h include/Cube.h include/Geometry.h include/Triangle.h include/BoundingBox.h include/WindowParams.h include/NGLScene.h include/MainWindow.h include/GeometryList.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/Ray.cpp src/Sphere.cpp src/Render.cpp src/Load.cpp src/Light.cpp src/Camera.cpp src/Object.cpp src/Settings.cpp src/Image.cpp src/Scene.cpp src/Material.cpp src/Cube.cpp src/Geometry.cpp src/Triangle.cpp src/BoundingBox.cpp src/NGLSceneMouseControls.cpp src/NGLScene.cpp src/MainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/Ray.h include/Sphere.h include/Load.h include/Light.h include/Camera.h include/Settings.h include/Image.h include/Scene.h include/Material.h include/Cube.h include/Geometry.h include/Triangle.h include/BoundingBox.h include/WindowParams.h include/NGLScene.h include/MainWindow.h include/GeometryList.h include/triObject.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/Ray.cpp src/Sphere.cpp src/Load.cpp src/Light.cpp src/Camera.cpp src/Settings.cpp src/Image.cpp src/Scene.cpp src/Material.cpp src/Cube.cpp src/Geometry.cpp src/Triangle.cpp src/BoundingBox.cpp src/NGLSceneMouseControls.cpp src/NGLScene.cpp src/MainWindow.cpp src/triObject.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui/MainWindow.ui $(DISTDIR)/
 
 
@@ -380,6 +375,12 @@ moc/moc_NGLScene.cpp: /home/tom/NGL/include/ngl/Transformation.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
 		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
 		include/NGLScene.h \
 		moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -404,6 +405,12 @@ moc/moc_MainWindow.cpp: include/NGLScene.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
 		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
 		include/MainWindow.h \
 		moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -447,28 +454,404 @@ obj/main.o: src/main.cpp include/MainWindow.h \
 		/home/tom/NGL/include/ngl/VAOFactory.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
-		include/WindowParams.h
+		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
-obj/Ray.o: src/Ray.cpp include/Ray.h
+obj/Ray.o: src/Ray.cpp include/Ray.h \
+		include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Ray.o src/Ray.cpp
 
 obj/Sphere.o: src/Sphere.cpp include/Sphere.h \
-		include/Vec3.h \
 		include/Geometry.h \
+		include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
 		include/Ray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Sphere.o src/Sphere.cpp
-
-obj/Render.o: src/Render.cpp include/Render.h \
-		include/Scene.h \
-		include/Camera.h \
-		include/Light.h \
-		include/Object.h \
-		include/Ray.h \
-		include/Sphere.h \
-		include/Vec3.h \
-		include/Geometry.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Render.o src/Render.cpp
 
 obj/Load.o: src/Load.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Load.o src/Load.cpp
@@ -479,24 +862,231 @@ obj/Light.o: src/Light.cpp
 obj/Camera.o: src/Camera.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Camera.o src/Camera.cpp
 
-obj/Object.o: src/Object.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Object.o src/Object.cpp
-
 obj/Settings.o: src/Settings.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Settings.o src/Settings.cpp
 
 obj/Image.o: src/Image.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Image.o src/Image.cpp
 
-obj/Scene.o: src/Scene.cpp include/Ray.h \
+obj/Scene.o: src/Scene.cpp include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
+		include/Ray.h \
 		include/Sphere.h \
-		include/Vec3.h \
 		include/Geometry.h \
+		include/Cube.h \
 		include/Scene.h \
 		include/Camera.h \
 		include/Light.h \
-		include/Object.h \
-		include/GeometryList.h
+		include/GeometryList.h \
+		include/Material.h \
+		include/triObject.h \
+		/home/tom/NGL/include/ngl/Vec3.h \
+		/home/tom/NGL/include/ngl/Types.h \
+		/home/tom/NGL/gl3w/gl3w.h \
+		/home/tom/NGL/gl3w/glcorearb.h \
+		/home/tom/NGL/include/ngl/fmt/format.h \
+		/home/tom/NGL/include/ngl/fmt/format.cc \
+		/home/tom/NGL/include/ngl/NGLMessage.h \
+		/home/tom/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/Vec4.h \
+		/home/tom/NGL/include/ngl/Vec2.h \
+		/home/tom/NGL/include/ngl/AbstractVAO.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
+		/home/tom/NGL/include/ngl/NGLassert.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Scene.o src/Scene.cpp
 
 obj/Material.o: src/Material.cpp 
@@ -505,7 +1095,198 @@ obj/Material.o: src/Material.cpp
 obj/Cube.o: src/Cube.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Cube.o src/Cube.cpp
 
-obj/Geometry.o: src/Geometry.cpp include/Geometry.h \
+obj/Geometry.o: src/Geometry.cpp include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
+		include/Geometry.h \
 		include/Ray.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Geometry.o src/Geometry.cpp
 
@@ -513,8 +1294,198 @@ obj/Triangle.o: src/Triangle.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Triangle.o src/Triangle.cpp
 
 obj/BoundingBox.o: src/BoundingBox.cpp include/Sphere.h \
-		include/Vec3.h \
 		include/Geometry.h \
+		include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
 		include/Ray.h \
 		include/BoundingBox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/BoundingBox.o src/BoundingBox.cpp
@@ -537,7 +1508,13 @@ obj/NGLSceneMouseControls.o: src/NGLSceneMouseControls.cpp include/NGLScene.h \
 		/home/tom/NGL/include/ngl/VAOFactory.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
-		include/WindowParams.h
+		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/NGLSceneMouseControls.o src/NGLSceneMouseControls.cpp
 
 obj/NGLScene.o: src/NGLScene.cpp include/NGLScene.h \
@@ -559,6 +1536,12 @@ obj/NGLScene.o: src/NGLScene.cpp include/NGLScene.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
 		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
 		/home/tom/NGL/include/ngl/NGLInit.h \
 		/home/tom/NGL/include/ngl/Singleton.h \
 		/home/tom/NGL/include/ngl/VAOPrimitives.h \
@@ -569,13 +1552,202 @@ obj/NGLScene.o: src/NGLScene.cpp include/NGLScene.h \
 		/home/tom/NGL/include/ngl/Mat2.h \
 		/home/tom/NGL/include/ngl/Mat3.h \
 		include/Scene.h \
+		include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
 		include/Camera.h \
+		include/Ray.h \
 		include/Light.h \
-		include/Object.h \
 		include/Sphere.h \
-		include/Vec3.h \
-		include/Geometry.h \
-		include/Ray.h
+		include/Geometry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/NGLScene.o src/NGLScene.cpp
 
 obj/MainWindow.o: src/MainWindow.cpp include/MainWindow.h \
@@ -598,8 +1770,228 @@ obj/MainWindow.o: src/MainWindow.cpp include/MainWindow.h \
 		/home/tom/NGL/include/ngl/AbstractVAO.h \
 		/home/tom/NGL/include/ngl/SimpleVAO.h \
 		include/WindowParams.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
 		ui_MainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/MainWindow.o src/MainWindow.cpp
+
+obj/triObject.o: src/triObject.cpp include/triObject.h \
+		/home/tom/NGL/include/ngl/Vec3.h \
+		/home/tom/NGL/include/ngl/Types.h \
+		/home/tom/NGL/gl3w/gl3w.h \
+		/home/tom/NGL/gl3w/glcorearb.h \
+		/home/tom/NGL/include/ngl/fmt/format.h \
+		/home/tom/NGL/include/ngl/fmt/format.cc \
+		/home/tom/NGL/include/ngl/NGLMessage.h \
+		/home/tom/NGL/include/ngl/MessageQueue/AbstractMessageConsumer.h \
+		/home/tom/NGL/include/ngl/Obj.h \
+		/home/tom/NGL/include/ngl/AbstractMesh.h \
+		/home/tom/NGL/include/ngl/BBox.h \
+		/home/tom/NGL/include/ngl/Vec4.h \
+		/home/tom/NGL/include/ngl/Vec2.h \
+		/home/tom/NGL/include/ngl/AbstractVAO.h \
+		/home/tom/NGL/include/ngl/RibExport.h \
+		/home/tom/NGL/include/ngl/Texture.h \
+		/home/tom/NGL/include/ngl/Image.h \
+		/home/tom/NGL/include/ngl/NGLassert.h \
+		include/eigen3/Eigen/Geometry \
+		include/eigen3/Eigen/Core \
+		include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
+		include/eigen3/Eigen/src/Core/util/Macros.h \
+		include/eigen3/Eigen/src/Core/util/MKL_support.h \
+		include/eigen3/Eigen/src/misc/blas.h \
+		include/eigen3/Eigen/src/Core/util/Constants.h \
+		include/eigen3/Eigen/src/Core/util/Meta.h \
+		include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
+		include/eigen3/Eigen/src/Core/util/StaticAssert.h \
+		include/eigen3/Eigen/src/Core/util/XprHelper.h \
+		include/eigen3/Eigen/src/Core/util/Memory.h \
+		include/eigen3/Eigen/src/Core/NumTraits.h \
+		include/eigen3/Eigen/src/Core/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/GenericPacketMath.h \
+		include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
+		include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
+		include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
+		include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
+		include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
+		include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
+		include/eigen3/Eigen/src/Core/IO.h \
+		include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
+		include/eigen3/Eigen/src/Core/DenseBase.h \
+		include/eigen3/Eigen/src/plugins/BlockMethods.h \
+		include/eigen3/Eigen/src/Core/MatrixBase.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/EigenBase.h \
+		include/eigen3/Eigen/src/Core/Product.h \
+		include/eigen3/Eigen/src/Core/CoreEvaluators.h \
+		include/eigen3/Eigen/src/Core/AssignEvaluator.h \
+		include/eigen3/Eigen/src/Core/Assign.h \
+		include/eigen3/Eigen/src/Core/ArrayBase.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		include/eigen3/Eigen/src/Core/util/BlasUtil.h \
+		include/eigen3/Eigen/src/Core/DenseStorage.h \
+		include/eigen3/Eigen/src/Core/NestByValue.h \
+		include/eigen3/Eigen/src/Core/ReturnByValue.h \
+		include/eigen3/Eigen/src/Core/NoAlias.h \
+		include/eigen3/Eigen/src/Core/PlainObjectBase.h \
+		include/eigen3/Eigen/src/Core/Matrix.h \
+		include/eigen3/Eigen/src/Core/Array.h \
+		include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
+		include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
+		include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		include/eigen3/Eigen/src/Core/Dot.h \
+		include/eigen3/Eigen/src/Core/StableNorm.h \
+		include/eigen3/Eigen/src/Core/Stride.h \
+		include/eigen3/Eigen/src/Core/MapBase.h \
+		include/eigen3/Eigen/src/Core/Map.h \
+		include/eigen3/Eigen/src/Core/Ref.h \
+		include/eigen3/Eigen/src/Core/Block.h \
+		include/eigen3/Eigen/src/Core/VectorBlock.h \
+		include/eigen3/Eigen/src/Core/Transpose.h \
+		include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
+		include/eigen3/Eigen/src/Core/Diagonal.h \
+		include/eigen3/Eigen/src/Core/DiagonalProduct.h \
+		include/eigen3/Eigen/src/Core/Redux.h \
+		include/eigen3/Eigen/src/Core/Visitor.h \
+		include/eigen3/Eigen/src/Core/Fuzzy.h \
+		include/eigen3/Eigen/src/Core/Swap.h \
+		include/eigen3/Eigen/src/Core/CommaInitializer.h \
+		include/eigen3/Eigen/src/Core/GeneralProduct.h \
+		include/eigen3/Eigen/src/Core/Solve.h \
+		include/eigen3/Eigen/src/Core/Inverse.h \
+		include/eigen3/Eigen/src/Core/SolverBase.h \
+		include/eigen3/Eigen/src/Core/PermutationMatrix.h \
+		include/eigen3/Eigen/src/Core/Transpositions.h \
+		include/eigen3/Eigen/src/Core/TriangularMatrix.h \
+		include/eigen3/Eigen/src/Core/SelfAdjointView.h \
+		include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		include/eigen3/Eigen/src/Core/products/Parallelizer.h \
+		include/eigen3/Eigen/src/Core/ProductEvaluators.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/SolveTriangular.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
+		include/eigen3/Eigen/src/Core/BandMatrix.h \
+		include/eigen3/Eigen/src/Core/CoreIterators.h \
+		include/eigen3/Eigen/src/Core/ConditionEstimator.h \
+		include/eigen3/Eigen/src/Core/BooleanRedux.h \
+		include/eigen3/Eigen/src/Core/Select.h \
+		include/eigen3/Eigen/src/Core/VectorwiseOp.h \
+		include/eigen3/Eigen/src/Core/Random.h \
+		include/eigen3/Eigen/src/Core/Replicate.h \
+		include/eigen3/Eigen/src/Core/Reverse.h \
+		include/eigen3/Eigen/src/Core/ArrayWrapper.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
+		include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
+		include/eigen3/Eigen/src/Core/Assign_MKL.h \
+		include/eigen3/Eigen/src/Core/GlobalFunctions.h \
+		include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		include/eigen3/Eigen/SVD \
+		include/eigen3/Eigen/QR \
+		include/eigen3/Eigen/Cholesky \
+		include/eigen3/Eigen/Jacobi \
+		include/eigen3/Eigen/src/Jacobi/Jacobi.h \
+		include/eigen3/Eigen/src/Cholesky/LLT.h \
+		include/eigen3/Eigen/src/Cholesky/LDLT.h \
+		include/eigen3/Eigen/src/misc/lapacke.h \
+		include/eigen3/Eigen/src/misc/lapacke_mangling.h \
+		include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
+		include/eigen3/Eigen/Householder \
+		include/eigen3/Eigen/src/Householder/Householder.h \
+		include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
+		include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR.h \
+		include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
+		include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
+		include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
+		include/eigen3/Eigen/src/misc/RealSvd2x2.h \
+		include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
+		include/eigen3/Eigen/src/SVD/SVDBase.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD.h \
+		include/eigen3/Eigen/src/SVD/BDCSVD.h \
+		include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
+		include/eigen3/Eigen/LU \
+		include/eigen3/Eigen/src/misc/Kernel.h \
+		include/eigen3/Eigen/src/misc/Image.h \
+		include/eigen3/Eigen/src/LU/FullPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU.h \
+		include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
+		include/eigen3/Eigen/src/LU/Determinant.h \
+		include/eigen3/Eigen/src/LU/InverseImpl.h \
+		include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
+		include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
+		include/eigen3/Eigen/src/Geometry/EulerAngles.h \
+		include/eigen3/Eigen/src/Geometry/Homogeneous.h \
+		include/eigen3/Eigen/src/Geometry/RotationBase.h \
+		include/eigen3/Eigen/src/Geometry/Rotation2D.h \
+		include/eigen3/Eigen/src/Geometry/Quaternion.h \
+		include/eigen3/Eigen/src/Geometry/AngleAxis.h \
+		include/eigen3/Eigen/src/Geometry/Transform.h \
+		include/eigen3/Eigen/src/Geometry/Translation.h \
+		include/eigen3/Eigen/src/Geometry/Scaling.h \
+		include/eigen3/Eigen/src/Geometry/Hyperplane.h \
+		include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
+		include/eigen3/Eigen/src/Geometry/AlignedBox.h \
+		include/eigen3/Eigen/src/Geometry/Umeyama.h \
+		include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
+		include/Geometry.h \
+		include/Ray.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/triObject.o src/triObject.cpp
 
 obj/moc_NGLScene.o: moc/moc_NGLScene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/moc_NGLScene.o moc/moc_NGLScene.cpp

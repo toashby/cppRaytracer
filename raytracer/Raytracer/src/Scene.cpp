@@ -13,6 +13,8 @@
 #include "triObject.h"
 #include <math.h>
 
+#include <nlohmann/json.hpp>
+
 Eigen::Vector3f color(const Ray& r, Geometry *world, int depth)
 {
     hit_record rec;
@@ -42,13 +44,14 @@ Eigen::Vector3f color(const Ray& r, Geometry *world, int depth)
 
 void Scene::Render(int samples)
 {
+    std::ifstream i("file.json");
+    nlohmann::json j;
+    i >> j;
+    std::cout << j.at("firstName") << std::endl;
+
     resx = 300;
     resy = 150;
     nsam = samples;//samples
-
-    std::ofstream myfile;
-    myfile.open ("example.ppm");
-    myfile << "P3\n" << resx << " " << resy << "\n255\n"; //for ppm file
 
     Geometry *list[6];
     //list[5] = new Sphere(Eigen::Vector3f(0,0,-1), 0.5, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
@@ -64,6 +67,11 @@ void Scene::Render(int samples)
     Geometry *world = new GeometryList(list, 6);
     Camera cam(Eigen::Vector3f(-0.4f,0.3f,2.2f), Eigen::Vector3f(0.0f,0.0f,-1.0f), Eigen::Vector3f(0.0f,1.0f,0.0f), 90, float(resx)/float(resy));
     //Camera cam(Eigen::Vector3f(0,0,2), Eigen::Vector3f(0,0,-4), Eigen::Vector3f(0,1,0), 90, float(resx)/float(resy));
+
+
+    std::ofstream myfile;
+    myfile.open ("example.ppm");
+    myfile << "P3\n" << resx << " " << resy << "\n255\n"; //for ppm file
 
     for(int j = resy - 1; j >= 0; j--)
     {
@@ -81,9 +89,9 @@ void Scene::Render(int samples)
             }
             col /= float(nsam);
             col = Eigen::Vector3f(sqrt(col(0)), sqrt(col(1)), sqrt(col(2)));
-            int ir = int(255.99*col(0));
-            int ig = int(255.99*col(1));
-            int ib = int(255.99*col(2));
+            int ir = int(255.99f*col(0));
+            int ig = int(255.99f*col(1));
+            int ib = int(255.99f*col(2));
             myfile << ir << " " << ig << " " << ib << "\n";
         }
     }

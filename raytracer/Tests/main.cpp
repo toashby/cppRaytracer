@@ -50,7 +50,7 @@ TEST(Sphere,userCtor){
 TEST(Sphere, hit){ //Test a ray which goes through a sphere
     Sphere s(Eigen::Vector3f(10.0f, 10.0f, 10.0f), 4.0f, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
     Ray r(Eigen::Vector3f(0.0f, 0.0f, 0.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
-    float t;
+    //float t;
     Eigen::Vector3f q;
     //EXPECT_TRUE(s.hit(r));
     //ASSERT_NE(t, 0);
@@ -60,7 +60,7 @@ TEST(Sphere, hit){ //Test a ray which goes through a sphere
 TEST(Sphere, miss){ //test a ray which misses a sphere
     Sphere s(Eigen::Vector3f(0.0f, 0.0f, 1.0f), 4.0f, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
     Ray r(Eigen::Vector3f(5.0f, 5.0f, 5.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
-    float t;
+    //float t;
     Eigen::Vector3f q;
     //EXPECT_FALSE(s.hit(r));
 

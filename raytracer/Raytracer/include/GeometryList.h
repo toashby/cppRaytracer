@@ -26,7 +26,7 @@ bool GeometryList::hit(const Ray& r, float t_min, float t_max, hit_record& rec) 
 {
     hit_record temp_rec;
     bool hit_anything = false;
-    double closest_so_far = t_max;
+    float closest_so_far = t_max;
     for(int i = 0; i < list_size; i++){
         //std::cout << "index: " << i << std::endl;
         if(list[i]->hit(r,t_min, closest_so_far, temp_rec))

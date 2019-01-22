@@ -56,7 +56,7 @@ public:
 
         hit_record temp_rec;
         bool hitSomething = false;
-        double closest_so_far = t_max;
+        float closest_so_far = t_max;
 
         for(unsigned int fc = 0; fc < faceList.size(); fc++)
         {
@@ -79,8 +79,6 @@ public:
 
     bool triHit(const Ray& r, float t_min, float t_max, hit_record& rec, Eigen::Vector3f vert0, Eigen::Vector3f vert1, Eigen::Vector3f vert2) const
     {
-        float ttemp = 0;
-
         Eigen::Vector3f edge1;
         Eigen::Vector3f edge2;
         Eigen::Vector3f h;

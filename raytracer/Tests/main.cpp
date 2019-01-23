@@ -51,11 +51,8 @@ TEST(Camera,defaultCtor){
 }
 
 TEST(Cube,defaultCtor){
-    //Cube c;
-}
-
-TEST(Light,defaultCtor){
-    Light l;
+    Cube c = Cube(new metal(Eigen::Vector3f(0.8, 0.2, 0.2), 0.02), Eigen::Vector3f(-1,0,-3), Eigen::Vector3f(-1.5,3,2), Eigen::Vector3f(-2,0,-1));//big back
+    EXPECT_FLOAT_EQ(c.vert1(1), 3);
 }
 
 TEST(Material,defaultCtor){
@@ -73,6 +70,3 @@ TEST(Scene,defaultCtor){
     Scene s;
 }
 
-TEST(Triangle,defaultCtor){
-    //Triangle t(Eigen::Vector3f(0.0f,0.0f,0.0f), Eigen::Vector3f(2.0f,2.0f,2.0f), Eigen::Vector3f(1.0f,0.0f,0.0f));
-}

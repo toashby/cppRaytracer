@@ -36,7 +36,9 @@ public :
 
         /// @brief dtor
   ~NGLScene() override;
- public slots :
+  void loadMatrixToShader(const ngl::Mat4 &_tx, const ngl::Vec4 &_colour);
+  void loadMatricesToShader(ngl::Transformation tx);
+public slots :
     /// @brief a slot to toggle wireframe mode
     /// @param[in] _mode the mode passed from the toggle
     /// button
@@ -73,13 +75,17 @@ public :
     /// @param[in] _i the index of the object
     void setObjectMode(int _i);
     /// @brief a slot to set the colour
-    void setColour();
+    void setColour(ngl::Vec4 col);
     /// @brief a slot to render
     void renderScene();
     ///@brief a slot to create a sphere
     void createSphere();
     ///@brief a slot to set the number of samples
     void setSamples(int _s);
+    ///@brief a slot to set the number of samples
+    void setXRes(int _x);
+    ///@brief a slot to set the number of samples
+    void setYRes(int _y);
 
 private :
     /// @brief m_wireframe mode
@@ -102,8 +108,38 @@ private :
     std::unique_ptr<ngl::Obj> m_mesh;
     std::vector<ngl::Vec3> vertList;
 
+    enum class MeshType : char {SPHERE, OBJ, CUBE, TROLL};
+    struct MeshData
+    {
+        ngl::Vec3 pos;
+        ngl::Vec3 dir;
+        ngl::Vec3 scale;
+        ngl::Vec3 rot;
+        ngl::Vec4 colour;
+        MeshType type;
+        float distance;
+        MeshData(const ngl::Vec3 &_pos, const ngl::Vec3 &_scale, const ngl::Vec3 &_rot, const ngl::Vec4 &_colour, MeshType _type) :
+            pos(_pos), scale(_scale), rot(_rot), colour(_colour), type(_type){}
+        MeshData()=default;
+        MeshData(const MeshData &)=default;
+        ~MeshData()=default;
+    };
+    std::vector<MeshData> m_meshes;
+    std::vector<std::vector<MeshData *>> m_collection;
+
+    void createMeshes();
+
+    struct Vertex{
+        ngl::Vec3 pos;
+        ngl::Vec4 Colour;
+    };
+
     /// @brief number of samples
     int m_samples = 1;
+    /// @brief number of samples
+    int m_xRes = 1;
+    /// @brief number of samples
+    int m_yRes = 1;
 
 //private slots:
 //        void renderScene();
@@ -130,6 +166,8 @@ protected:
   /// @brief our camera
   ngl::Mat4 m_view;
   ngl::Mat4 m_project;
+  ngl::Vec3 m_eye;
+  ngl::Vec3 m_look;
     /// @brief our transform for objects
     ngl::Transformation m_transform;
 private :
@@ -150,24 +188,6 @@ private :
   void wheelEvent( QWheelEvent* _event ) override;
 
   void loadMatricesToShader( );
-
-  enum class MeshType : char {TEAPOT, TROLL, CUBE, SPHERE};
-  struct MeshData
-  {
-      ngl::Vec3 pos;
-      ngl::Vec3 dir;
-      ngl::Vec3 scale;
-      ngl::Vec3 rot;
-      ngl::Vec4 colour;
-      MeshType type;
-      float distance;
-      MeshData(const ngl::Vec3 &_pos, const ngl::Vec3 &_scale, const ngl::Vec3 &_rot, const ngl::Vec4 &_colour, MeshType _type) :
-          pos(_pos), scale(_scale), rot(_rot), colour(_colour), type(_type){}
-      MeshData()=default;
-      MeshData(const MeshData &)=default;
-      ~MeshData()=default;
-  };
-  std::vector<MeshData> m_meshes;
 
 };
 

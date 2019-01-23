@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "Sphere.h"
 
+#include <nlohmann/json.hpp>
 
 //----------------------------------------------------------------------------------------------------------------------
 NGLScene::NGLScene( QWidget *_parent ) : QOpenGLWidget( _parent )
@@ -25,7 +26,42 @@ NGLScene::NGLScene( QWidget *_parent ) : QOpenGLWidget( _parent )
     m_position=0.0;
 
     m_selectedObject=0;
+
+    createMeshes();
 }
+
+
+void NGLScene::createMeshes(){
+    std::ifstream i("scene.json");
+    nlohmann::json j;
+    i >> j;
+    nlohmann::json::iterator it = j.begin();
+    m_meshes.resize(j.size());
+
+    //ngl::Random *rng = ngl::Random::instance();
+    for(auto &m : m_meshes){
+        m.pos=ngl::Vec3(it->at("x"), it->at("y"), it->at("z"));
+        m.colour=ngl::Vec4(it->at("r"), it->at("g"), it->at("b"), 0.5f);
+        //int type = static_cast<int>(rng->randomPositiveNumber(4));
+        std::string oType = it->at("oType").dump(); //get as a string
+        std::cout << oType <<std::endl;
+        if(oType == "\"sphere\""){
+            m.scale=ngl::Vec3(it->at("radius"), it->at("radius"), it->at("radius"));
+            m.type=MeshType::SPHERE;
+        }else if(oType == "\"obj\""){
+            m.pos=ngl::Vec3(0.0f,0.0f,0.0f);
+            m.scale=ngl::Vec3(1,1,1);
+            m.type=MeshType::OBJ;
+        }else if(oType == "\"abc\""){
+            m.type=MeshType::TROLL;
+        }else if(oType == "\"def\""){
+            m.type=MeshType::CUBE;
+        }
+
+        it++;
+    }
+}
+
 
 // This virtual function is called once before the first call to paintGL() or resizeGL(),
 //and then once whenever the widget has been assigned a new QGLContext.
@@ -40,12 +76,12 @@ void NGLScene::initializeGL()
   // enable depth testing for drawing
   glEnable(GL_DEPTH_TEST);
   /// create our camera
-  ngl::Vec3 eye(0.0f,2.0f,2.0f);
-  ngl::Vec3 look(0,0,0);
+  m_eye = (-0.4f,0.3f,2.2f);
+  m_look = (0,0,-1.0f);
   ngl::Vec3 up(0,1,0);
 
-  m_view=ngl::lookAt(eye,look,up);
-  m_project=ngl::perspective(45,float(1024/720),0.1f,300.0f);
+  m_view=ngl::lookAt(m_eye,m_look,up);
+  m_project=ngl::perspective(90,float(1024/720),0.1f,300.0f);
   // now to load the shader and set the values
   // grab an instance of shader manager
   ngl::ShaderLib* shader = ngl::ShaderLib::instance();
@@ -71,7 +107,7 @@ void NGLScene::initializeGL()
   shader->linkProgramObject( shaderProgram );
   // and make it active ready to load values
   ( *shader )[ shaderProgram ]->use();
-  shader->setUniform( "camPos", eye );
+  shader->setUniform( "camPos", m_eye );
   // now a light
   // setup the default shader material and light porerties
   // these are "uniform" so will retain their values
@@ -93,6 +129,8 @@ void NGLScene::initializeGL()
   m_mesh->createVAO();
   m_mesh->getFaceList();
   vertList = m_mesh->getVertexList();
+
+  update();
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -143,25 +181,45 @@ void NGLScene::paintGL()
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
   }
 
-    m_transform.setPosition(m_position);
-    m_transform.setScale(m_scale);
-    m_transform.setRotation(m_rotation);
-    loadMatricesToShader();
-    switch(m_selectedObject)
-    {
-        case 0 : prim->draw("teapot"); break;
-        case 1 : prim->draw("sphere"); break;
-        case 2 : prim->draw("cube"); break;
+  ngl::Mat4 rotX;
+  ngl::Mat4 rotY;
+  ngl::Mat4 mouseRotation;
+  rotX.rotateX(m_win.spinXFace);
+  rotY.rotateY(m_win.spinYFace);
+  mouseRotation=rotY*rotX;
+
+    ngl::Transformation tx;
+
+    //m_transform.setPosition(m_position);
+    //m_transform.setScale(m_scale);
+    //m_transform.setRotation(m_rotation);
+    //loadMatricesToShader();
+    //switch(m_selectedObject)
+    //{
+        //case 0 : prim->draw("teapot"); break;
+        //case 1 : prim->draw("sphere"); break;
+        //case 2 : prim->draw("cube"); break;
+    //}
+
+    std::cout << m_meshes.size() << std::endl;
+    for(auto m : m_meshes){
+        m_transform.setPosition(m.pos);
+        tx.addRotation(m.rot);
+        m_transform.setScale(m.scale);
+        setColour(m.colour);
+        loadMatricesToShader();
+        //loadMatrixToLineShader(mouseRotation * tx.getMatrix());
+        switch(m.type){
+        case MeshType::OBJ : prim->draw("teapot"); break;
+        case MeshType::CUBE : prim->draw("cube"); break;
+        case MeshType::SPHERE : prim->draw("sphere"); break;
+        case MeshType::TROLL : prim->draw("troll"); break;
+        }
     }
-    m_text->renderText(10,10,"Ray tracer");
+
+
+    //m_text->renderText(10,10,"Ray tracer");
 }
-
-
-
-
-
-
-
 
 NGLScene::~NGLScene()
 {
@@ -229,14 +287,14 @@ void NGLScene::setObjectMode(	int _i)
     m_selectedObject=_i;
     update();
 }
-void NGLScene::setColour()
+void NGLScene::setColour(ngl::Vec4 col)
 {
-    QColor colour = QColorDialog::getColor();
+    QColor colour = (col[0], col[1], col[2]);
     if( colour.isValid())
     {
     ngl::ShaderLib *shader=ngl::ShaderLib::instance();
     (*shader)[shaderProgram]->use();
-    shader->setUniform("albedo",static_cast<float>(colour.redF()),static_cast<float>(colour.greenF()),static_cast<float>(colour.blueF()));
+    shader->setUniform("albedo",static_cast<float>(col[0]),static_cast<float>(col[1]),static_cast<float>(col[2]));
     update();
     }
 }
@@ -245,13 +303,12 @@ void NGLScene::renderScene()
 {
     std::cout << "rendering!" << std::endl;
     Scene sc;
-    sc.Render(m_samples);
+    sc.Render(m_samples, m_xRes, m_yRes);
 }
 
 void NGLScene::createSphere()
 {
     Sphere s;
-
 
     std::cout << "creating sphere!" << std::endl;
     MeshData m;
@@ -268,6 +325,15 @@ void NGLScene::setSamples(int _s)
     m_samples = _s;
 }
 
+void NGLScene::setXRes(int _x)
+{
+    m_xRes = _x;
+}
+
+void NGLScene::setYRes(int _y)
+{
+    m_yRes = _y;
+}
 
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -292,7 +358,6 @@ void NGLScene::mouseMoveEvent( QMouseEvent* _event )
   // right mouse translate code
   else if ( m_win.translate && _event->buttons() == Qt::RightButton )
   {
-      std::cout<< "rotating!!!!" << std::endl;
     int diffX      = static_cast<int>( _event->x() - m_win.origXPos );
     int diffY      = static_cast<int>( _event->y() - m_win.origYPos );
     m_win.origX += diffX;
@@ -344,15 +409,22 @@ void NGLScene::mouseReleaseEvent( QMouseEvent* _event )
 void NGLScene::wheelEvent( QWheelEvent* _event )
 {
 
+    //ngl::Vec3 eye(0.0f,2.0f,2.0f);
+    //ngl::Vec3 look(0,0,0);
+    ngl::Vec3 up(0,1,0);
+
+
   // check the diff of the wheel position (0 means no change)
   if ( _event->delta() > 0 )
   {
-    m_modelPos.m_z += ZOOM;
-
+    m_eye += ZOOM*(m_look - m_eye);
   }
   else if ( _event->delta() < 0 )
   {
-    m_modelPos.m_z -= ZOOM;
+    m_eye += -ZOOM*(m_look - m_eye);
   }
+  m_view=ngl::lookAt(m_eye,m_look,up);
+  m_project=ngl::perspective(90,float(1024/720),0.1f,300.0f);
+
   update();
 }

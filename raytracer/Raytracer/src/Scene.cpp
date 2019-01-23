@@ -11,7 +11,6 @@
 #include "Camera.h"
 #include "Material.h"
 #include "triObject.h"
-#include "Load.h"
 #include <math.h>
 
 #include <nlohmann/json.hpp>
@@ -43,11 +42,11 @@ Eigen::Vector3f color(const Ray& r, Geometry *world, int depth)
     }
 }
 
-void Scene::Render(int samples)
+void Scene::Render(int samples, int xResolution, int yResolution)
 {
 
-    resx = 300;
-    resy = 150;
+    resx = xResolution;
+    resy = yResolution;
     nsam = samples;//samples
 
     std::ifstream i("scene.json");

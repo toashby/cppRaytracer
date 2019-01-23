@@ -21,37 +21,20 @@ CONFIG-=app_bundle
 
 SOURCES += src/main.cpp \
     src/Ray.cpp \
-    src/Sphere.cpp \
-    src/Load.cpp \
-    src/Light.cpp \
-    src/Camera.cpp \
-    src/Settings.cpp \
-    src/Image.cpp \
     src/Scene.cpp \
-    src/Material.cpp \
-    src/Cube.cpp \
-    src/Geometry.cpp \
-    src/Triangle.cpp \
-    src/BoundingBox.cpp \
     src/NGLSceneMouseControls.cpp \
     src/NGLScene.cpp \
-    src/MainWindow.cpp \
-    src/triObject.cpp
+    src/MainWindow.cpp
 
 
 HEADERS+= include/Ray.h \
           include/Sphere.h \
-          include/Load.h \
           include/Light.h \
           include/Camera.h \
-          include/Settings.h \
-          include/Image.h \
           include/Scene.h \
           include/Material.h \
           include/Cube.h \
           include/Geometry.h \
-          include/Triangle.h \
-          include/BoundingBox.h \
     include/WindowParams.h \
     include/NGLScene.h \
     include/MainWindow.h \

@@ -51,11 +51,9 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		../Raytracer/src/Ray.cpp \
-		../Raytracer/src/Sphere.cpp 
+		../Raytracer/src/Ray.cpp 
 OBJECTS       = main.o \
-		Ray.o \
-		Sphere.o
+		Ray.o
 DIST          = /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -245,8 +243,7 @@ DIST          = /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/lex.prf \
 		Tests.pro  main.cpp \
-		../Raytracer/src/Ray.cpp \
-		../Raytracer/src/Sphere.cpp
+		../Raytracer/src/Ray.cpp
 QMAKE_TARGET  = rayTracerTests
 DESTDIR       = 
 TARGET        = rayTracerTests
@@ -656,7 +653,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp ../Raytracer/src/Ray.cpp ../Raytracer/src/Sphere.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp ../Raytracer/src/Ray.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -899,13 +896,9 @@ main.o: main.cpp ../Raytracer/include/eigen3/Eigen/Geometry \
 		../Raytracer/include/Ray.h \
 		../Raytracer/include/Camera.h \
 		../Raytracer/include/Cube.h \
-		../Raytracer/include/Image.h \
 		../Raytracer/include/Light.h \
-		../Raytracer/include/Load.h \
 		../Raytracer/include/Material.h \
-		../Raytracer/include/Scene.h \
-		../Raytracer/include/Settings.h \
-		../Raytracer/include/Triangle.h
+		../Raytracer/include/Scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 Ray.o: ../Raytracer/src/Ray.cpp ../Raytracer/include/Ray.h \
@@ -1101,202 +1094,6 @@ Ray.o: ../Raytracer/src/Ray.cpp ../Raytracer/include/Ray.h \
 		../Raytracer/include/eigen3/Eigen/src/Geometry/Umeyama.h \
 		../Raytracer/include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Ray.o ../Raytracer/src/Ray.cpp
-
-Sphere.o: ../Raytracer/src/Sphere.cpp ../Raytracer/include/Sphere.h \
-		../Raytracer/include/Geometry.h \
-		../Raytracer/include/eigen3/Eigen/Geometry \
-		../Raytracer/include/eigen3/Eigen/Core \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/Macros.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/MKL_support.h \
-		../Raytracer/include/eigen3/Eigen/src/misc/blas.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/Constants.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/Meta.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/ForwardDeclarations.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/StaticAssert.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/XprHelper.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/Memory.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/NumTraits.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/GenericPacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/MathFunctionsImpl.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/SSE/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX512/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX512/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AVX/TypeCasting.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/SSE/TypeCasting.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AltiVec/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AltiVec/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/AltiVec/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/NEON/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/NEON/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/NEON/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/ZVector/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/ZVector/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/ZVector/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/Half.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/PacketMathHalf.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/TypeCasting.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/PacketMath.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/MathFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/Default/Settings.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/BinaryFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/NullaryFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/StlFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/arch/CUDA/Complex.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/IO.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/DenseCoeffsBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/DenseBase.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/BlockMethods.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/MatrixBase.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/EigenBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Product.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CoreEvaluators.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/AssignEvaluator.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Assign.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/ArrayBase.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/BlasUtil.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/DenseStorage.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/NestByValue.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/ReturnByValue.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/NoAlias.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/PlainObjectBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Matrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Array.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CwiseTernaryOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CwiseBinaryOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CwiseUnaryOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CwiseNullaryOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CwiseUnaryView.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/SelfCwiseBinaryOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Dot.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/StableNorm.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Stride.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/MapBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Map.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Ref.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Block.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/VectorBlock.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Transpose.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/DiagonalMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Diagonal.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/DiagonalProduct.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Redux.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Visitor.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Fuzzy.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Swap.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CommaInitializer.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/GeneralProduct.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Solve.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Inverse.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/SolverBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/PermutationMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Transpositions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/TriangularMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/SelfAdjointView.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/Parallelizer.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/ProductEvaluators.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixVector.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/SolveTriangular.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointProduct.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointRank2Update.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularMatrixVector.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularSolverVector.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/BandMatrix.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/CoreIterators.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/ConditionEstimator.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/BooleanRedux.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Select.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/VectorwiseOp.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Random.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Replicate.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Reverse.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/ArrayWrapper.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/Assign_MKL.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/GlobalFunctions.h \
-		../Raytracer/include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h \
-		../Raytracer/include/eigen3/Eigen/SVD \
-		../Raytracer/include/eigen3/Eigen/QR \
-		../Raytracer/include/eigen3/Eigen/Cholesky \
-		../Raytracer/include/eigen3/Eigen/Jacobi \
-		../Raytracer/include/eigen3/Eigen/src/Jacobi/Jacobi.h \
-		../Raytracer/include/eigen3/Eigen/src/Cholesky/LLT.h \
-		../Raytracer/include/eigen3/Eigen/src/Cholesky/LDLT.h \
-		../Raytracer/include/eigen3/Eigen/src/misc/lapacke.h \
-		../Raytracer/include/eigen3/Eigen/src/misc/lapacke_mangling.h \
-		../Raytracer/include/eigen3/Eigen/src/Cholesky/LLT_LAPACKE.h \
-		../Raytracer/include/eigen3/Eigen/Householder \
-		../Raytracer/include/eigen3/Eigen/src/Householder/Householder.h \
-		../Raytracer/include/eigen3/Eigen/src/Householder/HouseholderSequence.h \
-		../Raytracer/include/eigen3/Eigen/src/Householder/BlockHouseholder.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/HouseholderQR.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/FullPivHouseholderQR.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/ColPivHouseholderQR.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/CompleteOrthogonalDecomposition.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/HouseholderQR_LAPACKE.h \
-		../Raytracer/include/eigen3/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h \
-		../Raytracer/include/eigen3/Eigen/src/misc/RealSvd2x2.h \
-		../Raytracer/include/eigen3/Eigen/src/SVD/UpperBidiagonalization.h \
-		../Raytracer/include/eigen3/Eigen/src/SVD/SVDBase.h \
-		../Raytracer/include/eigen3/Eigen/src/SVD/JacobiSVD.h \
-		../Raytracer/include/eigen3/Eigen/src/SVD/BDCSVD.h \
-		../Raytracer/include/eigen3/Eigen/src/SVD/JacobiSVD_LAPACKE.h \
-		../Raytracer/include/eigen3/Eigen/LU \
-		../Raytracer/include/eigen3/Eigen/src/misc/Kernel.h \
-		../Raytracer/include/eigen3/Eigen/src/misc/Image.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/FullPivLU.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/PartialPivLU.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/PartialPivLU_LAPACKE.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/Determinant.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/InverseImpl.h \
-		../Raytracer/include/eigen3/Eigen/src/LU/arch/Inverse_SSE.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/OrthoMethods.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/EulerAngles.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Homogeneous.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/RotationBase.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Rotation2D.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Quaternion.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/AngleAxis.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Transform.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Translation.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Scaling.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Hyperplane.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/ParametrizedLine.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/AlignedBox.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/Umeyama.h \
-		../Raytracer/include/eigen3/Eigen/src/Geometry/arch/Geometry_SSE.h \
-		../Raytracer/include/Ray.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Sphere.o ../Raytracer/src/Sphere.cpp
 
 ####### Install
 

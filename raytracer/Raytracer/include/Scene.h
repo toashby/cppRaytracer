@@ -15,12 +15,13 @@ public:
     //void AddObject(Object o);
 
     //void Render();
-    void Render(Scene s);
-    void Render(int samples);
+    //void Render(Scene s, int xResolution, int yResolution);
+    //void Render(int samples);
     int resx;
     int resy;
     int nsam;
 
+    void Render(int samples, int xResolution, int yResolution);
 private:
     std::vector<Light> lights;
     //std::vector<Object> objects;

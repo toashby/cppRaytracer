@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_NGLScene_t {
-    QByteArrayData data[23];
-    char stringdata0[215];
+    QByteArrayData data[27];
+    char stringdata0[245];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,10 +50,14 @@ QT_MOC_LITERAL(15, 136, 12), // "setZPosition"
 QT_MOC_LITERAL(16, 149, 13), // "setObjectMode"
 QT_MOC_LITERAL(17, 163, 2), // "_i"
 QT_MOC_LITERAL(18, 166, 9), // "setColour"
-QT_MOC_LITERAL(19, 176, 11), // "renderScene"
-QT_MOC_LITERAL(20, 188, 12), // "createSphere"
-QT_MOC_LITERAL(21, 201, 10), // "setSamples"
-QT_MOC_LITERAL(22, 212, 2) // "_s"
+QT_MOC_LITERAL(19, 176, 9), // "ngl::Vec4"
+QT_MOC_LITERAL(20, 186, 3), // "col"
+QT_MOC_LITERAL(21, 190, 11), // "renderScene"
+QT_MOC_LITERAL(22, 202, 12), // "createSphere"
+QT_MOC_LITERAL(23, 215, 10), // "setSamples"
+QT_MOC_LITERAL(24, 226, 2), // "_s"
+QT_MOC_LITERAL(25, 229, 7), // "setXRes"
+QT_MOC_LITERAL(26, 237, 7) // "setYRes"
 
     },
     "NGLScene\0toggleWireframe\0\0_mode\0"
@@ -61,8 +65,8 @@ QT_MOC_LITERAL(22, 212, 2) // "_s"
     "setZRotation\0_z\0setXScale\0setYScale\0"
     "setZScale\0setXPosition\0setYPosition\0"
     "setZPosition\0setObjectMode\0_i\0setColour\0"
-    "renderScene\0createSphere\0setSamples\0"
-    "_s"
+    "ngl::Vec4\0col\0renderScene\0createSphere\0"
+    "setSamples\0_s\0setXRes\0setYRes"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +76,7 @@ static const uint qt_meta_data_NGLScene[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,21 +84,23 @@ static const uint qt_meta_data_NGLScene[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   89,    2, 0x0a /* Public */,
-       4,    1,   92,    2, 0x0a /* Public */,
-       6,    1,   95,    2, 0x0a /* Public */,
-       8,    1,   98,    2, 0x0a /* Public */,
-      10,    1,  101,    2, 0x0a /* Public */,
-      11,    1,  104,    2, 0x0a /* Public */,
-      12,    1,  107,    2, 0x0a /* Public */,
-      13,    1,  110,    2, 0x0a /* Public */,
-      14,    1,  113,    2, 0x0a /* Public */,
-      15,    1,  116,    2, 0x0a /* Public */,
-      16,    1,  119,    2, 0x0a /* Public */,
-      18,    0,  122,    2, 0x0a /* Public */,
-      19,    0,  123,    2, 0x0a /* Public */,
-      20,    0,  124,    2, 0x0a /* Public */,
-      21,    1,  125,    2, 0x0a /* Public */,
+       1,    1,   99,    2, 0x0a /* Public */,
+       4,    1,  102,    2, 0x0a /* Public */,
+       6,    1,  105,    2, 0x0a /* Public */,
+       8,    1,  108,    2, 0x0a /* Public */,
+      10,    1,  111,    2, 0x0a /* Public */,
+      11,    1,  114,    2, 0x0a /* Public */,
+      12,    1,  117,    2, 0x0a /* Public */,
+      13,    1,  120,    2, 0x0a /* Public */,
+      14,    1,  123,    2, 0x0a /* Public */,
+      15,    1,  126,    2, 0x0a /* Public */,
+      16,    1,  129,    2, 0x0a /* Public */,
+      18,    1,  132,    2, 0x0a /* Public */,
+      21,    0,  135,    2, 0x0a /* Public */,
+      22,    0,  136,    2, 0x0a /* Public */,
+      23,    1,  137,    2, 0x0a /* Public */,
+      25,    1,  140,    2, 0x0a /* Public */,
+      26,    1,  143,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -108,10 +114,12 @@ static const uint qt_meta_data_NGLScene[] = {
     QMetaType::Void, QMetaType::Double,    7,
     QMetaType::Void, QMetaType::Double,    9,
     QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, 0x80000000 | 19,   20,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   22,
+    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void, QMetaType::Int,    7,
 
        0        // eod
 };
@@ -133,10 +141,12 @@ void NGLScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 8: _t->setYPosition((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 9: _t->setZPosition((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 10: _t->setObjectMode((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->setColour(); break;
+        case 11: _t->setColour((*reinterpret_cast< ngl::Vec4(*)>(_a[1]))); break;
         case 12: _t->renderScene(); break;
         case 13: _t->createSphere(); break;
         case 14: _t->setSamples((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->setXRes((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->setYRes((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -167,13 +177,13 @@ int NGLScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }

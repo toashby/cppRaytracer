@@ -11,151 +11,93 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ngl Qt Demo</string>
+   <string>Ray Tracer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="s_mainWindowGridLayout">
-    <item row="0" column="1">
-     <widget class="QGroupBox" name="s_transformGB">
+    <item row="2" column="1">
+     <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>Transform</string>
+       <string>Render</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Rotation</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QDoubleSpinBox" name="m_rotationX">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="m_numSamplesBox">
          <property name="minimum">
-          <double>-360.000000000000000</double>
+          <number>1</number>
          </property>
          <property name="maximum">
-          <double>360.000000000000000</double>
+          <number>999999</number>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="m_rotationY">
+        <widget class="QSpinBox" name="m_yResBox">
          <property name="minimum">
-          <double>-360.000000000000000</double>
+          <number>1</number>
          </property>
          <property name="maximum">
-          <double>360.000000000000000</double>
+          <number>999999</number>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QDoubleSpinBox" name="m_rotationZ">
-         <property name="minimum">
-          <double>-360.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>360.000000000000000</double>
+         <property name="value">
+          <number>200</number>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="samplesLabel">
          <property name="text">
-          <string>Scale</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QDoubleSpinBox" name="m_scaleX">
-         <property name="minimum">
-          <double>-4.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>4.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
-         </property>
-         <property name="value">
-          <double>1.000000000000000</double>
+          <string>Number Of Samples</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="m_scaleY">
-         <property name="minimum">
-          <double>-4.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>4.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
-         </property>
-         <property name="value">
-          <double>1.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QDoubleSpinBox" name="m_scaleZ">
-         <property name="minimum">
-          <double>-4.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>4.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
-         </property>
-         <property name="value">
-          <double>1.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QPushButton" name="m_renderButton">
          <property name="text">
-          <string>Position</string>
+          <string>Render Scene</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QDoubleSpinBox" name="m_positionX">
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="m_xResBox">
          <property name="minimum">
-          <double>-20.000000000000000</double>
+          <number>1</number>
          </property>
          <property name="maximum">
-          <double>20.000000000000000</double>
+          <number>999999</number>
          </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
+         <property name="value">
+          <number>400</number>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QDoubleSpinBox" name="m_positionY">
-         <property name="minimum">
-          <double>-20.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>20.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>X Resolution</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QDoubleSpinBox" name="m_positionZ">
-         <property name="minimum">
-          <double>-20.000000000000000</double>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Y Resolution</string>
          </property>
-         <property name="maximum">
-          <double>20.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.010000000000000</double>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="s_drawGB">
+      <property name="title">
+       <string>Draw</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QCheckBox" name="m_wireframe">
+         <property name="text">
+          <string>WireFrame</string>
          </property>
         </widget>
        </item>
@@ -163,66 +105,17 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QGroupBox" name="s_drawGB">
-      <property name="title">
-       <string>Draw</string>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QComboBox" name="m_objectSelection">
-         <item>
-          <property name="text">
-           <string>Teapot</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Sphere</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Cube</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="m_wireframe">
-         <property name="text">
-          <string>WireFrame</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="m_colour">
-         <property name="text">
-          <string>Choose Colour</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="m_createSphere">
-         <property name="text">
-          <string>Create Sphere</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item row="0" column="0">
      <spacer name="horizontalSpacer">
@@ -236,39 +129,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="2" column="1">
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>Render</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="m_numSamplesBox">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="maximum">
-          <number>999999</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="m_renderButton">
-         <property name="text">
-          <string>Render Scene</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="samplesLabel">
-         <property name="text">
-          <string>Number Of Samples</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </item>
    </layout>
   </widget>

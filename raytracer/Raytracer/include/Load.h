@@ -2,8 +2,14 @@
 #define LOAD_H_
 #include <eigen3/Eigen/Geometry>
 #include <vector>
-//#include "Object.h"
 #include "Light.h"
+#include "nlohmann/json.hpp"
+#include <iostream>
+#include <fstream>
+#include "Geometry.h"
+#include "Sphere.h"
+
+class Material;
 
 class Load
 {

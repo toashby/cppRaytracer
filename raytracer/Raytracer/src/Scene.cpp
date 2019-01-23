@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "Material.h"
 #include "triObject.h"
+#include "Load.h"
 #include <math.h>
 
 #include <nlohmann/json.hpp>
@@ -44,27 +45,55 @@ Eigen::Vector3f color(const Ray& r, Geometry *world, int depth)
 
 void Scene::Render(int samples)
 {
-    std::ifstream i("file.json");
-    nlohmann::json j;
-    i >> j;
-    std::cout << j.at("firstName") << std::endl;
 
     resx = 300;
     resy = 150;
     nsam = samples;//samples
 
-    Geometry *list[6];
-    //list[5] = new Sphere(Eigen::Vector3f(0,0,-1), 0.5, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
-    list[3] = new Sphere(Eigen::Vector3f(0.0f, -101.0f, -1.0f), 100, new metal(Eigen::Vector3f(0.5f, 0.5f, 0.8f), 0.02f));
-    list[2] = new Sphere(Eigen::Vector3f(1.0f,0.0f,-1.0f),0.5f, new metal(Eigen::Vector3f(0.8f, 0.6f, 0.2f), 1.0f));
-    list[4] = new Sphere(Eigen::Vector3f(-0.7f,0.0f,-2.0f), 0.5f, new metal(Eigen::Vector3f(0.4f, 0.8f, 0.2f), 0.1f));
-    list[1] = new Cube(new lambertian(Eigen::Vector3f(0.8f, 0.5f, 0.8f)), Eigen::Vector3f(2.0f,1.0f,-2.0f), Eigen::Vector3f(-2.0f,0.5f,-2.0f), Eigen::Vector3f(0.0f,0.0f,-2.0f));//middle
-    //list[2] = new Cube(new metal(Eigen::Vector3f(0.8, 0.2, 0.2), 0.02), Eigen::Vector3f(-1,0,-3), Eigen::Vector3f(-1.5,3,2), Eigen::Vector3f(-2,0,-1));//big back
-    list[0] = new Cube(new lambertian(Eigen::Vector3f(0.2f, 0.8f, 0.4f)), Eigen::Vector3f(2.0f,1.0f,-1.0f), Eigen::Vector3f(-0.5f,0.5f,-1.0f), Eigen::Vector3f(0.0f,-0.4f,-1.0f));//front
-    //list[6] = new Sphere(Eigen::Vector3f(0,1.5,-0.5), 0.5, new metal(Eigen::Vector3f(0.9, 0.2, 0.2), 0.1));
-    list[5] = new triObject(new metal(Eigen::Vector3f(0.2f, 0.6f, 0.2f), 0.1f));
+    std::ifstream i("scene.json");
+    nlohmann::json j;
+    i >> j;
 
-    Geometry *world = new GeometryList(list, 6);
+    // get an iterator to the first element
+    nlohmann::json::iterator it = j.begin();
+    std::cout << j.size() << std::endl;
+    Geometry *list[j.size()];
+
+    for(int i = 0; i < j.size(); i++)
+    {
+        std::string oType = it->at("oType").dump(); //get as a string
+
+        if(oType == "\"sphere\"")
+        {
+            if(it->at("mType") == "metal"){
+                list[i] = new Sphere(Eigen::Vector3f(it->at("x"), it->at("y"), it->at("z")), it->at("radius"), new metal(Eigen::Vector3f(it->at("r"), it->at("g"), it->at("b")), it->at("roughness")));
+            }
+            if(it->at("mType") == "lambert"){
+                list[i] = new Sphere(Eigen::Vector3f(it->at("x"), it->at("y"), it->at("z")), it->at("radius"), new lambertian(Eigen::Vector3f(it->at("r"), it->at("g"), it->at("b"))));
+            }
+        }else if(oType == "\"obj\"")
+        {
+            if(it->at("mType") == "metal"){
+                list[i] = new triObject(new metal(Eigen::Vector3f(it->at("r"), it->at("g"), it->at("b")), it->at("roughness")), it->at("name"));
+            }
+            if(it->at("mType") == "lambert"){
+                list[i] = new triObject(new lambertian(Eigen::Vector3f(it->at("r"), it->at("g"), it->at("b"))), (std::string)it->at("name"));
+            }
+        }
+        it++;
+    }
+
+    //list[5] = new Sphere(Eigen::Vector3f(0,0,-1), 0.5, new lambertian(Eigen::Vector3f(0.8, 0.3, 0.3)));
+    //list[3] = new Sphere(Eigen::Vector3f(0.0f, -101.0f, -1.0f), 100, new metal(Eigen::Vector3f(0.5f, 0.5f, 0.8f), 0.02f));
+    //list[2] = new Sphere(Eigen::Vector3f(1.0f,0.0f,-1.0f),0.5f, new metal(Eigen::Vector3f(0.8f, 0.6f, 0.2f), 1.0f));
+    //list[4] = new Sphere(Eigen::Vector3f(-0.7f,0.0f,-2.0f), 0.5f, new metal(Eigen::Vector3f(0.4f, 0.8f, 0.2f), 0.1f));
+    //list[1] = new Cube(new lambertian(Eigen::Vector3f(0.8f, 0.5f, 0.8f)), Eigen::Vector3f(2.0f,1.0f,-2.0f), Eigen::Vector3f(-2.0f,0.5f,-2.0f), Eigen::Vector3f(0.0f,0.0f,-2.0f));//middle
+    //list[2] = new Cube(new metal(Eigen::Vector3f(0.8, 0.2, 0.2), 0.02), Eigen::Vector3f(-1,0,-3), Eigen::Vector3f(-1.5,3,2), Eigen::Vector3f(-2,0,-1));//big back
+    //list[0] = new Cube(new lambertian(Eigen::Vector3f(0.2f, 0.8f, 0.4f)), Eigen::Vector3f(2.0f,1.0f,-1.0f), Eigen::Vector3f(-0.5f,0.5f,-1.0f), Eigen::Vector3f(0.0f,-0.4f,-1.0f));//front
+    //list[6] = new Sphere(Eigen::Vector3f(0,1.5,-0.5), 0.5, new metal(Eigen::Vector3f(0.9, 0.2, 0.2), 0.1));
+    //list[5] = new triObject(new metal(Eigen::Vector3f(0.2f, 0.6f, 0.2f), 0.1f));
+
+    Geometry *world = new GeometryList(list, j.size());
     Camera cam(Eigen::Vector3f(-0.4f,0.3f,2.2f), Eigen::Vector3f(0.0f,0.0f,-1.0f), Eigen::Vector3f(0.0f,1.0f,0.0f), 90, float(resx)/float(resy));
     //Camera cam(Eigen::Vector3f(0,0,2), Eigen::Vector3f(0,0,-4), Eigen::Vector3f(0,1,0), 90, float(resx)/float(resy));
 

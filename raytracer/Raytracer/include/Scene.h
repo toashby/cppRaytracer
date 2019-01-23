@@ -4,6 +4,7 @@
 #include <vector>
 #include <Camera.h>
 #include <Light.h>
+#include "Geometry.h"
 
 class Scene
 {
@@ -19,6 +20,7 @@ public:
     int resx;
     int resy;
     int nsam;
+
 private:
     std::vector<Light> lights;
     //std::vector<Object> objects;

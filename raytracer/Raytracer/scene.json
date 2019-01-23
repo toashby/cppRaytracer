@@ -1,0 +1,45 @@
+{
+  "sphere1": {
+    "oType": "sphere",
+    "x": 0.0,
+    "y": -101.0,
+    "z": -1.0,
+    "b": 0.8,
+    "g": 0.4,
+    "r": 0.4,
+    "radius": 100,
+    "mType": "lambert"
+  },
+  "sphere2": {
+    "oType": "sphere",
+    "x": 0.7,
+    "y": 0.7,
+    "z": 0.7,
+    "b": 0.2,
+    "g": 0.6,
+    "r": 0.2,
+    "radius": 0.5,
+    "mType": "metal",
+    "roughness": 0.1
+  },
+  "sphere3": {
+    "oType": "sphere",
+    "x": -0.7,
+    "y": 0.7,
+    "z": 0.7,
+    "b": 0.2,
+    "g": 0.6,
+    "r": 0.2,
+    "radius": 0.5,
+    "mType": "metal",
+    "roughness": 0.4
+  },
+  "cube1": {
+    "oType": "obj",
+    "b": 0.2,
+    "g": 0.6,
+    "r": 0.2,
+    "name": "box.obj",
+    "mType": "lambert"
+  }
+}

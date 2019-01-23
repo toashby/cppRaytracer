@@ -17,7 +17,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -55,8 +54,6 @@ public:
     QPushButton *m_createSphere;
     QSpacerItem *verticalSpacer;
     QSpacerItem *horizontalSpacer;
-    QSpacerItem *verticalSpacer_2;
-    QListView *listView;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_3;
     QSpinBox *m_numSamplesBox;
@@ -205,16 +202,6 @@ public:
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         s_mainWindowGridLayout->addItem(horizontalSpacer, 0, 0, 1, 1);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        s_mainWindowGridLayout->addItem(verticalSpacer_2, 0, 2, 2, 1);
-
-        listView = new QListView(centralwidget);
-        listView->setObjectName(QStringLiteral("listView"));
-        listView->setMaximumSize(QSize(200, 16777215));
-
-        s_mainWindowGridLayout->addWidget(listView, 0, 3, 2, 1);
 
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));

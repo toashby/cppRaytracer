@@ -13,10 +13,11 @@
 class triObject : public Geometry
 {
 public:
-    triObject(Material *m) : mat_ptr(m)
+    triObject(Material *m, std::string objName) : mat_ptr(m)
     {
+        std::cout << objName << std::endl;
         //load obj
-        m_mesh.reset( new ngl::Obj("suzanne.obj"));
+        m_mesh.reset( new ngl::Obj(objName));
         m_mesh->createVAO();
         faceList = m_mesh->getFaceList();
         vertList = m_mesh->getVertexList();

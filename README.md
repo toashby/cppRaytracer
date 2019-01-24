@@ -7,6 +7,11 @@ Currently capable of rendering spheres, triangles and triangulated obj files wit
 
 images output as a ppm file to /out.
 
+HOW TO RUN
+Clone the repositiory and open raytracerall.pro in qtcreator. Clean, build and run. A clean all may need to be performed in order to run. No external libraries are needed as eigen and nlohmann headers are included in the include folder.
+
+alternatively launch the raytracer executable in the Raytracer folder.
+
 
 ASE Final Submission
 My C++ Ray Tracer has evolved from its initial proposal thanks to various practical issues which arose during development and thanks to the advice given by Jon Macey in his video feedback. Initially I planned to have a triangle class but this was surplus to requirements. I instead stored the vertices within each object that needed them as a list which I could iterate through or look up with a face list. When hit detection is needed I pass the relevant triangle points to my hit detection algorithm and calculate edges for working out normal etcetera. I managed to implement most of what I outlined in the initial submission.

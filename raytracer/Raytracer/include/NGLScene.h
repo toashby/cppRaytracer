@@ -1,16 +1,18 @@
 #ifndef NGLSCENE_H_
 #define NGLSCENE_H_
 
+#include <memory>
+
+#include <ngl/Mat4.h>
+#include <ngl/Obj.h>
+#include <ngl/Text.h>
 #include <ngl/Transformation.h>
 #include <ngl/Vec3.h>
-#include <ngl/Mat4.h>
-#include <ngl/Text.h>
-#include "WindowParams.h"
 #include <QEvent>
-#include <QResizeEvent>
 #include <QOpenGLWidget>
-#include <memory>
-#include <ngl/Obj.h>
+#include <QResizeEvent>
+
+#include "WindowParams.h"
 
 
 /// @file NGLScene.h
@@ -44,32 +46,32 @@ public slots :
     /// button
     void toggleWireframe( bool _mode	 );
     /// @brief set the X rotation value
-    /// @parm[in] _x the value to set
+    /// @param[in] _x the value to set
     void setXRotation( double _x	);
     /// @brief set the Y rotation value
-    /// @parm[in] _y the value to set
+    /// @param[in] _y the value to set
     void setYRotation( double _y	);
     /// @brief set the Z rotation value
-    /// @parm[in] _z the value to set
+    /// @param[in] _z the value to set
     void setZRotation( double _z	);
     /// @brief set the X scale value
-    /// @parm[in] _x the value to set
+    /// @param[in] _x the value to set
     void setXScale( double _x	);
     /// @brief set the Y scale value
-    /// @parm[in] _y the value to set
+    /// @param[in] _y the value to set
     void setYScale( double _y	);
     /// @brief set the Z scale value
-    /// @parm[in] _z the value to set
+    /// @param[in] _z the value to set
     void setZScale( double _z	);
 
     /// @brief set the X position value
-    /// @parm[in] _x the value to set
+    /// @param[in] _x the value to set
     void setXPosition( double _x	);
     /// @brief set the Y position value
-    /// @parm[in] _y the value to set
+    /// @param[in] _y the value to set
     void setYPosition(double _y);
     /// @brief set the Z position value
-    /// @parm[in] _z the value to set
+    /// @param[in] _z the value to set
     void setZPosition(double _z	);
     /// @brief set the draw object
     /// @param[in] _i the index of the object
@@ -137,9 +139,9 @@ private :
     /// @brief number of samples
     int m_samples = 1;
     /// @brief number of samples
-    int m_xRes = 1;
+    int m_xRes = 400;
     /// @brief number of samples
-    int m_yRes = 1;
+    int m_yRes = 200;
 
 //private slots:
 //        void renderScene();

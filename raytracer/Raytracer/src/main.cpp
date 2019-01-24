@@ -1,16 +1,5 @@
-
-    //cout << "Hello World!" << endl;
-
-    //Sphere s(Eigen::Vector3f(10.0f, 10.0f, 10.0f), 4.0f);
-    //Ray r(Eigen::Vector3f(0.0f, 0.0f, 0.0f), Eigen::Vector3f(1.0f, 1.0f, 1.0f));
-    //float t;
-    //Eigen::Vector3f q;
-    //if(s.hit(r.getPosition(), r.getDirection(), t, q) == true){
-    //    cout << "sphere hit!!!" << endl;
-    //}
-    //return 0;
-
 #include <QApplication>
+
 #include "MainWindow.h"
 
 int main(int argc, char **argv)

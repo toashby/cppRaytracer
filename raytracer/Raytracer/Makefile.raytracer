@@ -78,7 +78,7 @@ DIST          = .qmake.stash \
 		include/NGLScene.h \
 		include/MainWindow.h \
 		include/GeometryList.h \
-		include/triObject.h src/main.cpp \
+		include/TriObject.h src/main.cpp \
 		src/Ray.cpp \
 		src/Scene.cpp \
 		src/NGLSceneMouseControls.cpp \
@@ -503,7 +503,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.11.1/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/Ray.h include/Sphere.h include/Light.h include/Camera.h include/Scene.h include/Material.h include/Cube.h include/Geometry.h include/WindowParams.h include/NGLScene.h include/MainWindow.h include/GeometryList.h include/triObject.h $(DISTDIR)/
+	$(COPY_FILE) --parents include/Ray.h include/Sphere.h include/Light.h include/Camera.h include/Scene.h include/Material.h include/Cube.h include/Geometry.h include/WindowParams.h include/NGLScene.h include/MainWindow.h include/GeometryList.h include/TriObject.h $(DISTDIR)/
 	$(COPY_FILE) --parents src/main.cpp src/Ray.cpp src/Scene.cpp src/NGLSceneMouseControls.cpp src/NGLScene.cpp src/MainWindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui/MainWindow.ui $(DISTDIR)/
 
@@ -1399,7 +1399,7 @@ obj/Scene.o: src/Scene.cpp include/eigen3/Eigen/Geometry \
 		include/Light.h \
 		include/GeometryList.h \
 		include/Material.h \
-		include/triObject.h \
+		include/TriObject.h \
 		/home/s5121024/NGL/include/ngl/Vec3.h \
 		/home/s5121024/NGL/include/ngl/Types.h \
 		/home/s5121024/NGL/gl3w/gl3w.h \
@@ -2070,22 +2070,6 @@ obj/MainWindow.o: src/MainWindow.cpp include/MainWindow.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QCheckBox \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qcheckbox.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QComboBox \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qcombobox.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qstyleoption.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qregularexpression.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qslider.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qabstractslider.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qstyle.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qtabbar.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qrubberband.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qabstractitemmodel.h \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QDoubleSpinBox \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qspinbox.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QGridLayout \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
@@ -2093,6 +2077,7 @@ obj/MainWindow.o: src/MainWindow.cpp include/MainWindow.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QGroupBox \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
@@ -2104,8 +2089,13 @@ obj/MainWindow.o: src/MainWindow.cpp include/MainWindow.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QSpacerItem \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QSpinBox \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qspinbox.h \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtCore/qregularexpression.h \
 		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QStatusBar \
-		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		/opt/Qt5.11.1/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/MainWindow.o src/MainWindow.cpp
 
 obj/moc_NGLScene.o: moc/moc_NGLScene.cpp 

@@ -39,7 +39,7 @@ HEADERS+= include/Ray.h \
     include/NGLScene.h \
     include/MainWindow.h \
     include/GeometryList.h \
-    include/triObject.h
+    include/TriObject.h
 
 FORMS+= $$PWD/ui/MainWindow.ui
 

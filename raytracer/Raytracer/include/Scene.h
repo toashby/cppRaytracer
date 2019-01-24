@@ -1,31 +1,31 @@
 #ifndef SCENE_H_
 #define SCENE_H_
-#include <eigen3/Eigen/Geometry>
+
 #include <vector>
-#include <Camera.h>
-#include <Light.h>
+
+#include <eigen3/Eigen/Geometry>
+
+#include "Camera.h"
 #include "Geometry.h"
+#include "Light.h"
 
 class Scene
 {
 public:
     Scene()=default;
-    void AddCamera(Camera c);
-    void AddLight(Light l);
-    //void AddObject(Object o);
 
-    //void Render();
-    //void Render(Scene s, int xResolution, int yResolution);
-    //void Render(int samples);
-    int resx;
-    int resy;
-    int nsam;
+    /// @brief x resolution of image
+    int m_resx;
+     /// @brief y resolution of image
+    int m_resy;
+     /// @brief the number of samples for each pixel
+    int m_numSamples;
 
-    void Render(int samples, int xResolution, int yResolution);
-private:
-    std::vector<Light> lights;
-    //std::vector<Object> objects;
-    //Camera camera;
+    /// @brief renders an image
+    /// @param[in] _samples number of rays to cast per pixel
+    /// @param[in] _xResolution width of image
+    /// @param[in] _yResolution height of image
+    void Render(int _samples, int _xResolution, int _yResolution);
 };
 
 #endif

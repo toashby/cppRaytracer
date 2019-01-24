@@ -1,16 +1,16 @@
-#include "NGLScene.h"
 #include <iostream>
-#include <ngl/Vec3.h>
-#include <ngl/NGLInit.h>
-#include <ngl/VAOPrimitives.h>
-#include <ngl/ShaderLib.h>
-#include <ngl/Vec3.h>
 #include <QColorDialog>
 
-#include "Scene.h"
-#include "Sphere.h"
+#include <ngl/NGLInit.h>
+#include <ngl/ShaderLib.h>
+#include <ngl/VAOPrimitives.h>
+#include <ngl/Vec3.h>
 
 #include <nlohmann/json.hpp>
+
+#include "NGLScene.h"
+#include "Scene.h"
+#include "Sphere.h"
 
 //----------------------------------------------------------------------------------------------------------------------
 NGLScene::NGLScene( QWidget *_parent ) : QOpenGLWidget( _parent )
@@ -44,7 +44,6 @@ void NGLScene::createMeshes(){
         m.colour=ngl::Vec4(it->at("r"), it->at("g"), it->at("b"), 0.5f);
         //int type = static_cast<int>(rng->randomPositiveNumber(4));
         std::string oType = it->at("oType").dump(); //get as a string
-        std::cout << oType <<std::endl;
         if(oType == "\"sphere\""){
             m.scale=ngl::Vec3(it->at("radius"), it->at("radius"), it->at("radius"));
             m.type=MeshType::SPHERE;
@@ -123,13 +122,6 @@ void NGLScene::initializeGL()
   m_text.reset(  new  ngl::Text(QFont("Arial",18)));
   m_text->setScreenSize(this->size().width(),this->size().height());
   m_text->setColour(1.0,1.0,0.0);
-
-  //load obj
-  m_mesh.reset( new ngl::Obj("box.obj"));
-  m_mesh->createVAO();
-  m_mesh->getFaceList();
-  vertList = m_mesh->getVertexList();
-
   update();
 }
 
@@ -190,26 +182,16 @@ void NGLScene::paintGL()
 
     ngl::Transformation tx;
 
-    //m_transform.setPosition(m_position);
-    //m_transform.setScale(m_scale);
-    //m_transform.setRotation(m_rotation);
-    //loadMatricesToShader();
-    //switch(m_selectedObject)
-    //{
-        //case 0 : prim->draw("teapot"); break;
-        //case 1 : prim->draw("sphere"); break;
-        //case 2 : prim->draw("cube"); break;
-    //}
-
-    std::cout << m_meshes.size() << std::endl;
-    for(auto m : m_meshes){
+    for(auto m : m_meshes)
+    {
         m_transform.setPosition(m.pos);
         tx.addRotation(m.rot);
         m_transform.setScale(m.scale);
         setColour(m.colour);
         loadMatricesToShader();
         //loadMatrixToLineShader(mouseRotation * tx.getMatrix());
-        switch(m.type){
+        switch(m.type)
+        {
         case MeshType::OBJ : prim->draw("teapot"); break;
         case MeshType::CUBE : prim->draw("cube"); break;
         case MeshType::SPHERE : prim->draw("sphere"); break;

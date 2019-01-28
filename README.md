@@ -1,5 +1,6 @@
 # Raytracer
-A basic ray tracer.
+A basic ray tracer inspired by:
+ray tracing in a weekend by Peter Shirley : http://in1weekend.blogspot.com/2016/01/ray-tracing-in-one-weekend.html?m=1 [online].
 
 Loads a preview of the scene to be rendered to an opengl view and then renders the scene using that same json file.
 

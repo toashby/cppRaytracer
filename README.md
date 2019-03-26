@@ -1,4 +1,7 @@
 # Raytracer
+
+![rt](https://github.com/toashby/raytracer/blob/master/raytracer/Raytracer/out/finalrender.png)
+
 A basic ray tracer inspired by:
 ray tracing in a weekend by Peter Shirley : http://in1weekend.blogspot.com/2016/01/ray-tracing-in-one-weekend.html?m=1 [online].
 

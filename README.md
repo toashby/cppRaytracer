@@ -2,7 +2,7 @@
 
 ![rt](https://github.com/toashby/raytracer/blob/master/raytracer/Raytracer/out/finalrender.png)
 
-A basic ray tracer inspired by:
+A basic ray tracer inspired by:  
 ray tracing in a weekend by Peter Shirley : http://in1weekend.blogspot.com/2016/01/ray-tracing-in-one-weekend.html?m=1 [online].
 
 Loads a preview of the scene to be rendered to an opengl view and then renders the scene using that same json file.
@@ -11,13 +11,13 @@ Currently capable of rendering spheres, triangles and triangulated obj files wit
 
 images output as a ppm file to /out.
 
-HOW TO RUN
+HOW TO RUN  
 Clone the repositiory and open raytracerall.pro in qtcreator. Clean, build and run. A clean all may need to be performed in order to run. No external libraries are needed as eigen and nlohmann headers are included in the include folder.
 
 alternatively launch the raytracer executable in the Raytracer folder.
 
 
-ASE Final Submission
+ASE Final Submission  
 My C++ Ray Tracer has evolved from its initial proposal thanks to various practical issues which arose during development and thanks to the advice given by Jon Macey in his video feedback. Initially I planned to have a triangle class but this was surplus to requirements. I instead stored the vertices within each object that needed them as a list which I could iterate through or look up with a face list. When hit detection is needed I pass the relevant triangle points to my hit detection algorithm and calculate edges for working out normal etcetera. I managed to implement most of what I outlined in the initial submission.
 
 The Ray Tracer has anti aliasing with variable samples per pixel.
@@ -32,10 +32,10 @@ In order to render multiple types of object with different material types I use 
 
 Obj files are loaded with NGL as a face list and a vertex list. The program loops through the face list to find the vertices and calculates triangle edges with them. This is then used to check ray triangle collision. This was initially very slow for large models but it is slightly faster now thanks to my axis aligned bounding box implementation which runs before checking triangles. It would further benefit from multi threading or the ability to run on the GPU.
 
-Future Work
+Future Work  
 I wish to add lighting to my tracer but did not have enough time. I would either do this by drawing shadow rays from hit points to the lights and seeing if the intersect geometry, or by adding an emission material to assign to geometry to have geometric lighting. I favour the latter approach as it soft shadows easier. Use of more smart pointers with the objects and materials would make the program more readable and easier to manage.
 
-Known issues
+Known issues  
 In the opengl preview of the scene the camera is not entirely correct.
 Obj files are still just displayed as teapots in the preview.
 TriObject can not have a position, they will render at the origin. 
